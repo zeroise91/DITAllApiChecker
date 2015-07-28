@@ -79,7 +79,15 @@ typedef struct
 } layout_view_data2;
 
 
+static String getSharedResourceFile(String x){
+  	String str=calloc(1024,sizeof(char));
 
+  	String sharedResRootPath=app_get_shared_resource_path();
+  	snprintf(str,1024,"%s%s",sharedResRootPath,x);
+  	free(sharedResRootPath);
+
+  	return str;
+  }
 notification_data *device_list_get(int *size){
 	static notification_data components[] =
 	{
@@ -736,41 +744,45 @@ void	getimageHeight(notification_data* data){
 
 void deletefile(notification_data* data){
 	File file = NewFile();
-	if(access("/opt/usr/media/Downloads/3.mp3",F_OK)!=-1){
 
-	file->Delete("/opt/usr/media/Downloads/3.mp3");
-	sprintf(data->result_text,"/opt/usr/media/Downloads/3.mp3<br>deleted");
+	if(access("/opt/usr/media/Downloads/copied.jpg",F_OK)!=-1){
+
+	file->Delete("/opt/usr/media/Downloads/copied.jpg");
+	sprintf(data->result_text,"/opt/usr/media/Downloads/copied.jpg<br>deleted");
 	}
 	else
 	{
-		sprintf(data->result_text,"delete target File:<br>/opt/usr/media/Downloads/3.mp3<br>doesn't exist");
+		sprintf(data->result_text,"delete target File:<br>/opt/usr/media/Downloads/copied.jpg<br>doesn't exist");
 	}
 	DestroyFile(file);
 }
 void copyfile(notification_data* data){
 		File file = NewFile();
-		if(access("/opt/usr/media/Downloads/2.mp3",F_OK)!=-1){
+		String srcfilepath=getSharedResourceFile("images/test.jpg");
 
-		file->Copy("/opt/usr/media/Downloads/2.mp3","/opt/usr/media/Downloads/3.mp3");
-		sprintf(data->result_text,"/opt/usr/media/Downloads/2.mp3"
+		if(access(srcfilepath,F_OK)!=-1){
+
+		file->Copy(srcfilepath,"/opt/usr/media/Downloads/copied.jpg");
+		sprintf(data->result_text,"%s"
 				"<br><br>copied to<br><br>"
-				"/opt/usr/media/Downloads/3.mp3");
+				"/opt/usr/media/Downloads/copied.jpg",srcfilepath);
 
 		}else{
-			sprintf(data->result_text,"copy source file:<br>/opt/usr/media/Downloads/2.mp3 doesn't exist");
+			sprintf(data->result_text,"copy source file:<br>%s doesn't exist",srcfilepath);
 		}
+		free(srcfilepath);
 		DestroyFile(file);
 
 }
 void movefile(notification_data* data){
 	File file = NewFile();
-	if(access("/opt/usr/media/Downloads/3.mp3",F_OK)!=-1){
-	file->Move("/opt/usr/media/Downloads/3.mp3","/opt/usr/media/Downloads/4.mp3");
-	sprintf(data->result_text,"/opt/usr/media/Downloads/3.mp3<br><br>moved to<br><br>/opt/usr/media/Downloads/4.mp3");
+	if(access("/opt/usr/media/Downloads/copied.jpg",F_OK)!=-1){
+	file->Move("/opt/usr/media/Downloads/copied.jpg","/opt/usr/media/Downloads/moved.jpg");
+	sprintf(data->result_text,"/opt/usr/media/Downloads/copied.jpg<br><br>moved to<br><br>/opt/usr/media/Downloads/moved.jpg");
 	}
 	else
 	{
-		sprintf(data->result_text,"/opt/usr/media/Downloads/3.mp3 doesn't exist");
+		sprintf(data->result_text,"/opt/usr/media/Downloads/copied.jpg doesn't exist");
 
 	}
 	DestroyFile(file);
@@ -807,7 +819,7 @@ void playvideo(notification_data* data){
 
 	}
 	else{
-		sprintf(data->result_text,"press<br>setEvasObject button<br>setURI(Video)<br>first");
+		sprintf(data->result_text,"press<br>setEvasObject button<br>setURI(Video) button<br>first");
 	}
 }
 void pausevideo(notification_data* data){
@@ -820,7 +832,7 @@ void pausevideo(notification_data* data){
 
 		}
 		else{
-			sprintf(data->result_text,"press<br>setEvasObject button<br>setURI(Video)<br>first");
+			sprintf(data->result_text,"press<br>setEvasObject button<br>setURI(Video) button<br>first");
 		}
 }
 void stopvideo(notification_data* data){
@@ -834,7 +846,7 @@ void stopvideo(notification_data* data){
 
 		}
 		else{
-			sprintf(data->result_text,"press<br>setEvasObject button<br>setURI(Video)<br>first");
+			sprintf(data->result_text,"press<br>setEvasObject button<br>setURI(Video) button<br>first");
 		}
 }
 void recordvideo(notification_data* data){
@@ -870,8 +882,11 @@ void getvideoinfo(notification_data* data){
 }
 void setURI_video(notification_data* data){
 	Video v= video_get_instance();
-	v->setURI(v,"/opt/usr/media/Videos/test.mp4");
-	sprintf(data->result_text,"VideoURI set:<br>/opt/usr/media/Videos/test.mp4");
+
+	String videofilepath =getSharedResourceFile("videos/Samsung Galaxy S3 Theme song.mp4");
+	v->setURI(v,videofilepath);
+	sprintf(data->result_text,"VideoURI set:<br>%s",videofilepath);
+	free(videofilepath);
 }
 
 void setevasObject(notification_data* data){
@@ -954,8 +969,10 @@ void getaudioInfo(notification_data* data){
 }
 void setURI_audio(notification_data* data){
 	Audio a=audio_get_instance();
-	a->setURI(a,"/opt/usr/media/Music/Over the Horizon.mp3");
-	sprintf(data->result_text,"audiofile path <br>/opt/usr/media/Music/Over the Horizon.mp3<br> set");
+	String audiofilepath= getSharedResourceFile("music/Over the Horizon.mp3");
+	a->setURI(a,audiofilepath);
+	sprintf(data->result_text,"AudioURI set: <br>%s<br>",audiofilepath);
+	free(audiofilepath);
 }
 
 void preference_int_get(notification_data* data){

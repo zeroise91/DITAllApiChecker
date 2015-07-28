@@ -40,6 +40,15 @@ typedef struct
 	const char *name;
 } layout_view_data2;
 
+static String getSharedResourceFile(String x){
+  	String str=calloc(1024,sizeof(char));
+
+  	String sharedResRootPath=app_get_shared_resource_path();
+  	snprintf(str,1024,"%s%s",sharedResRootPath,x);
+  	free(sharedResRootPath);
+
+  	return str;
+  }
 
 
 notification_data *log_component_list_get(int *size)
@@ -299,15 +308,6 @@ String getONNotiText(){
 	return buffer;
 }
 
-String getSharedResourceFile(String x){
-	String str=calloc(1024,sizeof(char));
-
-	String sharedResRootPath=app_get_shared_resource_path();
-	snprintf(str,1024,"%s%s",sharedResRootPath,x);
-	free(sharedResRootPath);
-
-	return str;
-}
 
 void setNIcon(notification_data* data){
 

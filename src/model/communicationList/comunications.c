@@ -40,6 +40,15 @@ typedef struct
 	const char *name;
 } layout_view_data2;
 
+static String getSharedResourceFile(String x){
+  	String str=calloc(1024,sizeof(char));
+
+  	String sharedResRootPath=app_get_shared_resource_path();
+  	snprintf(str,1024,"%s%s",sharedResRootPath,x);
+  	free(sharedResRootPath);
+
+  	return str;
+  }
 
 
 notification_data *communication_list_get(int *size)
@@ -397,14 +406,21 @@ void onBTconnect(notification_data* data)
 	Bluetooth bt = bluetooth_get_instance();
 
 	bool b = bt->onConnect(bt);
-	sprintf(data->result_text,"%s",b?"connect success":"connect fail");
+	if(b==true){
 
+		sprintf(data->result_text,"connect success<br>mac_address:<br>%s",((BluetoothExtends*)bt)->remoteMACAddr);
+	}
+	else
+	{
+	sprintf(data->result_text,"%s","connect fail");
+	}
 
 }
 void onBTdisconnect(notification_data* data)
 {
 	Bluetooth bt = bluetooth_get_instance();
 	bool b =bt->onDisconnect(bt);
+
 	sprintf(data->result_text,"%s",b?"disconnect success":"disconnect fail");
 }
 
@@ -421,8 +437,16 @@ void BTrecv(notification_data* data)
 void BTsend(notification_data* data)
 {
 	Bluetooth bt = bluetooth_get_instance();
-	bt->FileSend(bt,"/opt/usr/media/Downloads/1.jpg");
-	sprintf(data->result_text,"/opt/usr/media/Downloads/1.jpg sending");
+	if(bt-> isConnected(bt)){
+	String sendfilepath= getSharedResourceFile("music/Over the Horizon.mp3");
+	bt->FileSend(bt,sendfilepath);
+	sprintf(data->result_text,"%s<br>sending to<br>%s",sendfilepath,((BluetoothExtends*)bt)->remoteMACAddr);
+	free(sendfilepath);
+	}
+	else
+	{
+		sprintf(data->result_text,"not connected");
+	}
 }
 void isBTconnected(notification_data* data)
 {
