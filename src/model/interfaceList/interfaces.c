@@ -386,7 +386,7 @@ void setONProgress(notification_data* data){
 	static double progress_rate=0.1;
 
 	on_noti->setProgress(on_noti,progress_rate);
-	sprintf(data->result_text,"ongoingnotification <br>progress %.2lf",progress_rate*100);
+	sprintf(data->result_text,"ongoingnotification <br>progress %.2lf%%",progress_rate*100);
 
 	progress_rate+=0.1;
 

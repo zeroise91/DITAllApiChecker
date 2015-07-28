@@ -672,11 +672,11 @@ void  getimageBurstId (notification_data* data){
 	Image image= image_get_instance();
 	if(((ImageExtends*)image)->imageMetaHandle){
 			String str =image->getBurstId(image);
-		snprintf(data->result_text,1024,"MeiaID: %s",str?str:"(none)");
+		snprintf(data->result_text,1024,"MediaID: %s",str?str:"(none)");
 
 		}
 		else{
-			snprintf(data->result_text,1024,"press extractInfo button first");
+			snprintf(data->result_text,1024,"press extractImageInfo button first");
 		}
 }
 void  getimageMediaId (notification_data* data){
@@ -687,7 +687,7 @@ void  getimageMediaId (notification_data* data){
 
 	}
 	else{
-		snprintf(data->result_text,1024,"press extractInfo button first");
+		snprintf(data->result_text,1024,"press extractImageInfo button first");
 	}
 
 
@@ -700,7 +700,7 @@ void  getimageDateTaken (notification_data* data){
 
 	}
 	else{
-		snprintf(data->result_text,1024,"press extractInfo button first");
+		snprintf(data->result_text,1024,"press extractImageInfo button first");
 	}
 
 }
@@ -714,7 +714,7 @@ void	getimageWidth(notification_data* data){
 	}
 	else
 	{
-		snprintf(data->result_text,1024,"press extractInfo button first");
+		snprintf(data->result_text,1024,"press extractImageInfo button first");
 
 	}
 
@@ -728,7 +728,7 @@ void	getimageHeight(notification_data* data){
 	}
 	else
 	{
-		snprintf(data->result_text,1024,"press extractInfo button first");
+		snprintf(data->result_text,1024,"press extractImageInfo button first");
 
 	}
 
@@ -797,11 +797,11 @@ void searchfile(notification_data* data){
 }
 
 void playvideo(notification_data* data){
-	evas_object_show(img);							// Make the given Evas object visible
 	Video v= video_get_instance();
 
 	if(((VideoExtends*)v)->uri&&((VideoExtends*)v)->EvasObject)
 	{
+	evas_object_show(img);
 	v->Play(v);
 	sprintf(data->result_text,"video play");
 
@@ -871,35 +871,55 @@ void getvideoinfo(notification_data* data){
 void setURI_video(notification_data* data){
 	Video v= video_get_instance();
 	v->setURI(v,"/opt/usr/media/Videos/test.mp4");
+	sprintf(data->result_text,"VideoURI set:<br>/opt/usr/media/Videos/test.mp4");
 }
 
 void setevasObject(notification_data* data){
 
 	Video v= video_get_instance();
 	v->setObject(v,img);
+	sprintf(data->result_text,"video panel set complete");
+
 }
 
 void playaudio(notification_data* data){
 	Audio a=audio_get_instance();
-	if(	((AudioExtends*) a)->uri)
+	if(	((AudioExtends*) a)->uri){
 		a->Play(a);
+		sprintf(data->result_text,"play audio");
+
+	}
+	else{
+		sprintf(data->result_text,"press<br>setURI(audio)butten<br>first");
+
+	}
 }
 void pauseaudio(notification_data* data){
 	Audio a=audio_get_instance();
 
-	if(	((AudioExtends*) a)->uri)
+	if(	((AudioExtends*) a)->uri){
 		a->Pause(a);
+		sprintf(data->result_text,"pause audio");
+
+	}
 	else
 	{
+		sprintf(data->result_text,"press<br>setURI(audio)butten<br>first");
 
 	}
 }
 void stopaudio(notification_data* data){
 	Audio a=audio_get_instance();
 
-	if(	((AudioExtends*) a)->uri)
+	if(	((AudioExtends*) a)->uri){
 		a->Stop(a);
+		sprintf(data->result_text,"stop audio");
 
+	}
+	else
+	{
+		sprintf(data->result_text,"press<br>setURI(audio)butten<br>first");
+	}
 }
 void recordaudio(notification_data* data){
 
