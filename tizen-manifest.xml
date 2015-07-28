@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<manifest xmlns="http://tizen.org/ns/packages" api-version="2.3" package="org.tizen.ditapichecker" version="1.0.0">
+    <profile name="mobile"/>
+    <ui-application appid="org.tizen.ditapichecker" exec="ditapichecker" multiple="false" nodisplay="false" taskmanage="true" type="capp">
+        <label>ditapichecker</label>
+        <icon>ditapichecker.png</icon>
+    </ui-application>
+    <privileges>
+        <privilege>http://tizen.org/privilege/nfc.cardemulation</privilege>
+        <privilege>http://tizen.org/privilege/systemsettings</privilege>
+        <privilege>http://tizen.org/privilege/haptic</privilege>
+        <privilege>http://tizen.org/privilege/display</privilege>
+        <privilege>http://tizen.org/privilege/datasharing</privilege>
+        <privilege>http://tizen.org/privilege/packagemanager.info</privilege>
+        <privilege>http://tizen.org/privilege/power</privilege>
+        <privilege>http://tizen.org/privilege/mediastorage</privilege>
+        <privilege>http://tizen.org/privilege/network.get</privilege>
+        <privilege>http://tizen.org/privilege/bluetooth</privilege>
+        <privilege>http://tizen.org/privilege/nfc</privilege>
+        <privilege>http://tizen.org/privilege/network.profile</privilege>
+        <privilege>http://tizen.org/privilege/recorder</privilege>
+        <privilege>http://tizen.org/privilege/download</privilege>
+        <privilege>http://tizen.org/privilege/location</privilege>
+        <privilege>http://tizen.org/privilege/network.set</privilege>
+        <privilege>http://tizen.org/privilege/keymanager</privilege>
+        <privilege>http://tizen.org/privilege/camera</privilege>
+        <privilege>http://tizen.org/privilege/externalstorage</privilege>
+        <privilege>http://tizen.org/privilege/appmanager.launch</privilege>
+        <privilege>http://tizen.org/privilege/push</privilege>
+        <privilege>http://tizen.org/privilege/volume.set</privilege>
+        <privilege>http://tizen.org/privilege/contact.write</privilege>
+        <privilege>http://tizen.org/privilege/internet</privilege>
+        <privilege>http://tizen.org/privilege/led</privilege>
+        <privilege>http://tizen.org/privilege/notification</privilege>
+    </privileges>
+    <feature name="http://tizen.org/feature/camera.front.flash">true</feature>
+    <feature name="http://tizen.org/feature/sensor.magnetometer.wakeup">true</feature>
+    <feature name="http://tizen.org/feature/camera">true</feature>
+    <feature name="http://tizen.org/feature/sensor.accelerometer">true</feature>
+    <feature name="http://tizen.org/feature/network.secure_element">true</feature>
+    <feature name="http://tizen.org/feature/platform.core.cpu.arch.armv7">true</feature>
+    <feature name="http://tizen.org/feature/sensor.magnetometer">true</feature>
+    <feature name="http://tizen.org/feature/network.secure_element.uicc">true</feature>
+    <feature name="http://tizen.org/feature/sensor.humidity">true</feature>
+    <feature name="http://tizen.org/feature/led">true</feature>
+    <feature name="http://tizen.org/feature/sensor.photometer.wakeup">true</feature>
+    <feature name="http://tizen.org/feature/sensor.gravity">true</feature>
+    <feature name="http://tizen.org/feature/sensor.accelerometer.wakeup">true</feature>
+    <feature name="http://tizen.org/feature/sensor.linear_acceleration">true</feature>
+    <feature name="http://tizen.org/feature/sensor.pedometer">true</feature>
+    <feature name="http://tizen.org/feature/sensor.gesture_recognition">true</feature>
+    <feature name="http://tizen.org/feature/sensor.rotation_vector">true</feature>
+    <feature name="http://tizen.org/feature/camera.back.flash">true</feature>
+    <feature name="http://tizen.org/feature/input.keyboard.layout">qwerty</feature>
+    <feature name="http://tizen.org/feature/location.wps">true</feature>
+    <feature name="http://tizen.org/feature/sensor.gyroscope.wakeup">true</feature>
+    <feature name="http://tizen.org/feature/network.nfc.card_emulation">true</feature>
+    <feature name="http://tizen.org/feature/network.push">true</feature>
+    <feature name="http://tizen.org/feature/location.gps">true</feature>
+    <feature name="http://tizen.org/feature/sensor.activity_recognition">true</feature>
+    <feature name="http://tizen.org/feature/network.telephony">true</feature>
+    <feature name="http://tizen.org/feature/input.keyboard">true</feature>
+    <feature name="http://tizen.org/feature/location">true</feature>
+    <feature name="http://tizen.org/feature/network.bluetooth.health">true</feature>
+    <feature name="http://tizen.org/feature/network.bluetooth.le">true</feature>
+    <feature name="http://tizen.org/feature/network.nfc">true</feature>
+    <feature name="http://tizen.org/feature/camera.front">true</feature>
+    <feature name="http://tizen.org/feature/network.bluetooth.audio.media">true</feature>
+    <feature name="http://tizen.org/feature/network.bluetooth.audio.call">true</feature>
+    <feature name="http://tizen.org/feature/network.bluetooth.opp">true</feature>
+    <feature name="http://tizen.org/feature/network.wifi">true</feature>
+    <feature name="http://tizen.org/feature/sensor.heart_rate_monitor">true</feature>
+    <feature name="http://tizen.org/feature/sensor.tiltmeter">true</feature>
+    <feature name="http://tizen.org/feature/sensor.proximity">true</feature>
+    <feature name="http://tizen.org/feature/network.secure_element.ese">true</feature>
+    <feature name="http://tizen.org/feature/network.wifi.direct.service_discovery">true</feature>
+    <feature name="http://tizen.org/feature/sensor.temperature">true</feature>
+    <feature name="http://tizen.org/feature/network.wifi.direct">true</feature>
+    <feature name="http://tizen.org/feature/sensor.photometer">true</feature>
+    <feature name="http://tizen.org/feature/sensor.barometer">true</feature>
+    <feature name="http://tizen.org/feature/sensor.gyroscope">true</feature>
+    <feature name="http://tizen.org/feature/sensor.ultraviolet">true</feature>
+    <feature name="http://tizen.org/feature/camera.back">true</feature>
+    <feature name="http://tizen.org/feature/sensor.proximity.wakeup">true</feature>
+    <feature name="http://tizen.org/feature/network.bluetooth">true</feature>
+    <feature name="http://tizen.org/feature/sensor.barometer.wakeup">true</feature>
+    <feature name="http://tizen.org/feature/sensor.wrist_up">true</feature>
+    <feature name="http://tizen.org/feature/network.nfc.reserved_push">true</feature>
+    <feature name="http://tizen.org/feature/sensor.tiltmeter.wakeup">true</feature>
+    <feature name="http://tizen.org/feature/multimedia.transcoder">true</feature>
+    <feature name="http://tizen.org/feature/network.wifi.direct.display">true</feature>
+    <feature name="http://tizen.org/feature/network.bluetooth.hid">true</feature>
+    <feature name="http://tizen.org/feature/network.telephony.mms">true</feature>
+</manifest>
