@@ -428,8 +428,8 @@ void BTrecv(notification_data* data)
 {
 	Bluetooth bt = bluetooth_get_instance();
 	String recv=NULL;
-	bt->FileRecv(bt,&recv);
-	sprintf(data->result_text,"%s","File Receiving on");
+	bool b=bt->FileRecv(bt,&recv);
+	sprintf(data->result_text,"%s",b?"File Receiving on":"reciving failed");
 
 
 
@@ -439,9 +439,15 @@ void BTsend(notification_data* data)
 	Bluetooth bt = bluetooth_get_instance();
 	if(bt-> isConnected(bt)){
 	String sendfilepath= getSharedResourceFile("music/Over the Horizon.mp3");
-	bt->FileSend(bt,sendfilepath);
-	sprintf(data->result_text,"%s<br>sending to<br>%s",sendfilepath,((BluetoothExtends*)bt)->remoteMACAddr);
-	free(sendfilepath);
+	bool b=bt->FileSend(bt,sendfilepath);
+		if(b){
+		sprintf(data->result_text,"%s<br>sending to<br>%s",sendfilepath,((BluetoothExtends*)bt)->remoteMACAddr);
+		free(sendfilepath);
+		}
+		else
+		{
+			sprintf(data->result_text,"File sending failed");
+		}
 	}
 	else
 	{
@@ -669,7 +675,7 @@ void onsockConnect(notification_data* data)
 	if(sock->isAccessible(sock)){
 
 		bool b=sock->onConnect(sock,"210.118.74.89",3300);
-		sprintf(data->result_text,"%s",b?"connect ok":"connect fail");
+		sprintf(data->result_text,"%s",b?"connect ok<br>&lt;IP_ADDRESS&gt;:&lt;PORT&gt;<br>G210.118.74.89:3300":"connect fail");
 
 	}
 	else{

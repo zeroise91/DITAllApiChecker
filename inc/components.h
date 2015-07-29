@@ -19,7 +19,7 @@
 
  notification_data *device_list_get(int *size);
  notification_data *devicestatus_list_get(int *size);
- notification_data *file_component_list_get(int *size);
+ notification_data *file_submodules_list_get(int *size);
  notification_data *preference_component_list_get(int *size);
  notification_data *sensor_component_list_get(int *size);
  notification_data *vibrator_component_list_get(int *size);
@@ -60,6 +60,15 @@
   void UltraViolet_item_fill_cb(void *data, Evas_Object *obj, void *event_info);
   void Temperature_item_fill_cb(void *data, Evas_Object *obj, void *event_info);
   void Humidity_item_fill_cb(void *data, Evas_Object *obj, void *event_info);
+
+  void file_view_layout_fill_cb(void *data, Evas_Object *obj, void *event_info);
+  void video_view_layout_fill_cb(void *data, Evas_Object *obj, void *event_info);
+  void audio_view_layout_fill_cb(void *data, Evas_Object *obj, void *event_info);
+  void image_view_layout_fill_cb(void *data, Evas_Object *obj, void *event_info);
+  void camerarecorder_view_layout_fill_cb(void *data, Evas_Object *obj, void *event_info);
+  void audiorecorder_view_layout_fill_cb(void *data, Evas_Object *obj, void *event_info);
+
+
 
   void accaddCallback(notification_data* data);
   void accdatachCallback(notification_data* data);
@@ -268,8 +277,18 @@
   void sockrecv(notification_data* data);
 
 
+//2depth of file
+  void camerarecorderinit(notification_data* data);
+  void camerarecorderstart(notification_data* data);
+  void camerarecorderpause(notification_data* data);
+  void camerarecorderend(notification_data* data);
+  void camerarecordercancel(notification_data* data);
 
-
+  void audiorecorderinit(notification_data* data);
+  void audiorecorderstart(notification_data* data);
+  void audiorecorderpause(notification_data* data);
+  void audiorecorderend(notification_data* data);
+  void audiorecordercancel(notification_data* data);
 
 
 #endif /* COMPONENTS_H_ */

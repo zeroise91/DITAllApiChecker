@@ -302,7 +302,7 @@ void MagnetoMeter_item_fill_cb(void *data, Evas_Object *obj, void *event_info)
 	notification_data *notification_list = NULL;
 	int size=0;
 	//
-	notification_list=Accelerometer_component_list_get(&size);
+	notification_list=MagnetoMeter_component_list_get(&size);
 	notification_list[0].status=lists;
 
 	elm_list_item_append(list,notification_list[0].name,NULL,NULL,_sensorcallback_layout_fill_cb2depth,&notification_list[0]);

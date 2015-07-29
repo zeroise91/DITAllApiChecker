@@ -32,9 +32,14 @@
 #include "Device/Preference.h"
 #include "Device/File.h"
 #include "Device/Sensor.h"
-
+#include "Device/MediaRecorder.h"
 
 #define MAX_ATTRIBUTE_NUM 32
+
+
+static Evas_Object* img=NULL;
+static Evas_Object* recoderview=NULL;
+
 
 const char attributeString[][35]={
 		"METADATA_DURATION",			/**< Duration */
@@ -122,36 +127,15 @@ notification_data *devicestatus_list_get(int *size){
 	return components;
 }
 
-notification_data *file_component_list_get(int *size){
+notification_data *file_submodules_list_get(int *size){
 	static notification_data components[] =
 	{
-			{ "deleteFile", NULL,  0, 0, deletefile, },
-			{ "copyfile", NULL,  0, 0, copyfile, },
-			{ "moveFile", NULL,  0, 0, movefile, },
-			{ "searchFile", NULL,  0, 0, searchfile, },
-
-			{ "setEvasObject", NULL,  0, 0, setevasObject, },
-			{ "setURI(video)", NULL,  0, 0, setURI_video, },
-			{ "getVideoinfo", NULL,  0, 0, getvideoinfo, },
-			{ "playVideo", NULL,  0, 0, playvideo, },
-			{ "pauseVideo", NULL,  0, 0, pausevideo, },
-			{ "stopVideo", NULL,  0, 0, stopvideo, },
-			{ "recordVideo", NULL,  0, 0, recordvideo, },
-
-			{ "setURI(audio)", NULL,  0, 0, setURI_audio, },
-			{ "playAudio", NULL,  0, 0, playaudio, },
-			{ "pauseAudio", NULL,  0, 0, pauseaudio, },
-			{ "stopAudio", NULL,  0, 0, stopaudio, },
-			{ "recordAudio", NULL,  0, 0, recordaudio, },
-			{ "getAudioInfo", NULL,  0, 0, getaudioInfo, },
-
-			{ "extractImageInfo", NULL,  0, 0, extractinfo, },
-			{ "getimageBurstId", NULL,  0, 0, getimageBurstId, },
-			{ "getimageMediaId", NULL,  0, 0, getimageMediaId, },
-			{ "getimageDateTaken", NULL,  0, 0, getimageDateTaken, },
-			{ "getimageHeight", NULL,  0, 0, getimageHeight, },
-			{ "getimageWidth", NULL,  0, 0, getimageWidth, }
-
+			{ "File", NULL,  0, 0, none, },
+			{ "Video", NULL,  0, 0, none, },
+			{ "Audio", NULL,  0, 0, none, },
+			{ "Image", NULL,  0, 0, none, },
+			{ "Camcorder", NULL,  0, 0, none, },
+			{ "AudioRecorder", NULL,  0, 0, none, }
 	};
 	*size = sizeof(components) / sizeof(components[0]);
 	return components;
@@ -209,7 +193,6 @@ notification_data *vibrator_component_list_get(int *size){
 	*size = sizeof(components) / sizeof(components[0]);
 	return components;
 }
-void _tab_view_layout_fill_act(void *data, Evas_Object *obj, void *event_info);
 
 
 void devicestatus_item_fill_cb(void *data, Evas_Object *obj, void *event_info)
@@ -254,14 +237,13 @@ void devicestatus_item_fill_cb(void *data, Evas_Object *obj, void *event_info)
 	datas->navi_item = elm_naviframe_item_push(datas->navi, datas->name, NULL, NULL,datas->layout , NULL);
 	//	_tab_view_layout_fill_cb2depth(data,obj,event_info);
 }
-Evas_Object* img=NULL;
+
+
 Evas* canvas=NULL;
 
 
 void file_item_fill_cb(void *data, Evas_Object *obj, void *event_info)
 {
-
-
 	elm_list_item_selected_set(event_info, EINA_FALSE);
 	notification_data* notify_info=(notification_data*)data;
 	layout_view_data2 *datas = calloc(1, sizeof(layout_view_data2));
@@ -274,10 +256,20 @@ void file_item_fill_cb(void *data, Evas_Object *obj, void *event_info)
 	if(img==NULL)
 	{
 		img = evas_object_image_filled_add(canvas);		// Add an image to the given evas
-		evas_object_image_file_set(img, "/opt/usr/media/Downloads/1.jpg", NULL);//Set the source file from where an image object must fetch the real image data
+		evas_object_image_file_set(img, "/opt/usr/apps/org.tizen.ditapichecker.shared/res/images/test.jpg", NULL);//Set the source file from where an image object must fetch the real image data
 		evas_object_move(img, 240, 108);					// Move the given Evas object to the given location inside its canvas�� viewport
 		evas_object_resize(img, 240, 135);				// Change the size of the given Evas object
 	}
+	if(recoderview==NULL)
+	{
+
+		recoderview  = evas_object_image_filled_add(canvas);		// Add an image to the given evas
+		evas_object_image_file_set(recoderview, "/opt/usr/apps/org.tizen.ditapichecker.shared/res/images/test.jpg", NULL);//Set the source file from where an image object must fetch the real image data
+		evas_object_move(recoderview, 0, 0);					// Move the given Evas object to the given location inside its canvas�� viewport
+		evas_object_resize(recoderview, 240, 135);
+		evas_object_show(recoderview);// Change the size of the given Evas object
+	}
+
 	datas->name = notify_info->name;
 	datas->layout = ui_utils_layout_add(datas->navi, _layout_view_destroy2, datas);
 
@@ -293,14 +285,21 @@ void file_item_fill_cb(void *data, Evas_Object *obj, void *event_info)
 	notification_data *notification_list = NULL;
 	int size=0;
 	//
-	notification_list=file_component_list_get(&size);
+	notification_list=file_submodules_list_get(&size);
 
 	for(int i=0;i<size;i++){
 
 		notification_list[i].status=lists;
-		elm_list_item_append(list,notification_list[i].name,NULL,NULL,_tab_view_layout_fill_cb2depth,&notification_list[i]);
-
 	}
+
+	elm_list_item_append(list,notification_list[0].name,NULL,NULL,file_view_layout_fill_cb,&notification_list[0]);
+	elm_list_item_append(list,notification_list[1].name,NULL,NULL,video_view_layout_fill_cb,&notification_list[1]);
+	elm_list_item_append(list,notification_list[2].name,NULL,NULL,audio_view_layout_fill_cb,&notification_list[2]);
+	elm_list_item_append(list,notification_list[3].name,NULL,NULL,image_view_layout_fill_cb,&notification_list[3]);
+	elm_list_item_append(list,notification_list[4].name,NULL,NULL,camerarecorder_view_layout_fill_cb,&notification_list[4]);
+	elm_list_item_append(list,notification_list[5].name,NULL,NULL,audiorecorder_view_layout_fill_cb,&notification_list[5]);
+
+
 
 
 	evas_object_hide(elm_object_part_content_unset(datas->layout, "elm.swallow.content"));
@@ -745,9 +744,8 @@ void	getimageHeight(notification_data* data){
 void deletefile(notification_data* data){
 	File file = NewFile();
 
-	if(access("/opt/usr/media/Downloads/copied.jpg",F_OK)!=-1){
+	if(file->Delete("/opt/usr/media/Downloads/copied.jpg")==true){
 
-	file->Delete("/opt/usr/media/Downloads/copied.jpg");
 	sprintf(data->result_text,"/opt/usr/media/Downloads/copied.jpg<br>deleted");
 	}
 	else
@@ -760,9 +758,8 @@ void copyfile(notification_data* data){
 		File file = NewFile();
 		String srcfilepath=getSharedResourceFile("images/test.jpg");
 
-		if(access(srcfilepath,F_OK)!=-1){
+		if(file->Copy(srcfilepath,"/opt/usr/media/Downloads/copied.jpg")==true){
 
-		file->Copy(srcfilepath,"/opt/usr/media/Downloads/copied.jpg");
 		sprintf(data->result_text,"%s"
 				"<br><br>copied to<br><br>"
 				"/opt/usr/media/Downloads/copied.jpg",srcfilepath);
@@ -776,8 +773,8 @@ void copyfile(notification_data* data){
 }
 void movefile(notification_data* data){
 	File file = NewFile();
-	if(access("/opt/usr/media/Downloads/copied.jpg",F_OK)!=-1){
-	file->Move("/opt/usr/media/Downloads/copied.jpg","/opt/usr/media/Downloads/moved.jpg");
+	if(file->Move("/opt/usr/media/Downloads/copied.jpg","/opt/usr/media/Downloads/moved.jpg")){
+	;
 	sprintf(data->result_text,"/opt/usr/media/Downloads/copied.jpg<br><br>moved to<br><br>/opt/usr/media/Downloads/moved.jpg");
 	}
 	else
@@ -1044,4 +1041,58 @@ void preference__clear(notification_data* data){
 
 	sprintf(data->result_text,"all datas are remove at preference");
 }
+
+
+
+
+
+ void camerarecorderinit(notification_data* data){
+
+ }
+ void camerarecorderstart(notification_data* data){
+
+ }
+ void camerarecorderpause(notification_data* data){
+
+ }
+ void camerarecorderend(notification_data* data){
+
+ }
+ void camerarecordercancel(notification_data* data){
+
+ }
+
+AudioRecorder audiorec_get_instance(){
+	static AudioRecorder pa=NULL;
+	if(pa==NULL)
+	{
+		pa=NewAudioRecorder();
+	}
+	return pa;
+}
+
+ void audiorecorderinit(notification_data* data){
+	 AudioRecorder pa=audiorec_get_instance();
+	 pa->Init(pa,"/opt/usr/media/Sounds/recorded.mp4");
+ }
+ void audiorecorderstart(notification_data* data){
+	 AudioRecorder pa=audiorec_get_instance();
+	 pa->Start(pa);
+ }
+ void audiorecorderpause(notification_data* data){
+	 AudioRecorder pa=audiorec_get_instance();
+	 pa->Pause(pa);
+
+ }
+ void audiorecorderend(notification_data* data){
+	 AudioRecorder pa=audiorec_get_instance();
+
+	 pa->End(pa);
+ }
+ void audiorecordercancel(notification_data* data){
+	 AudioRecorder pa=audiorec_get_instance();
+
+	 pa->Cancel(pa);
+ }
+
 
