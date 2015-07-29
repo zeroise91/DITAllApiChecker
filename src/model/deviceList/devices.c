@@ -1062,37 +1062,37 @@ void preference__clear(notification_data* data){
 
  }
 
-AudioRecorder audiorec_get_instance(){
-	static AudioRecorder pa=NULL;
-	if(pa==NULL)
-	{
-		pa=NewAudioRecorder();
-	}
-	return pa;
-}
+//AudioRecorder audiorec_get_instance(){
+//	static AudioRecorder pa=NULL;
+//	if(pa==NULL)
+//	{
+//		pa=NewAudioRecorder();
+//	}
+//	return pa;
+//}
 
  void audiorecorderinit(notification_data* data){
-	 AudioRecorder pa=audiorec_get_instance();
-	 pa->Init(pa,"/opt/usr/media/Sounds/recorded.mp4");
+//	 AudioRecorder pa=audiorec_get_instance();
+//	 pa->Init(pa,"/opt/usr/media/Sounds/recorded.mp4");
  }
  void audiorecorderstart(notification_data* data){
-	 AudioRecorder pa=audiorec_get_instance();
-	 pa->Start(pa);
+//	 AudioRecorder pa=audiorec_get_instance();
+//	 pa->Start(pa);
  }
  void audiorecorderpause(notification_data* data){
-	 AudioRecorder pa=audiorec_get_instance();
-	 pa->Pause(pa);
+//	 AudioRecorder pa=audiorec_get_instance();
+//	 pa->Pause(pa);
 
  }
  void audiorecorderend(notification_data* data){
-	 AudioRecorder pa=audiorec_get_instance();
-
-	 pa->End(pa);
+//	 AudioRecorder pa=audiorec_get_instance();
+//
+//	 pa->End(pa);
  }
  void audiorecordercancel(notification_data* data){
-	 AudioRecorder pa=audiorec_get_instance();
-
-	 pa->Cancel(pa);
+//	 AudioRecorder pa=audiorec_get_instance();
+//
+//	 pa->Cancel(pa);
  }
 
 
