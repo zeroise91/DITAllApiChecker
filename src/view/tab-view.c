@@ -270,7 +270,7 @@ static void _tab_view_fill_list(Evas_Object *list, tab_view_data *data)
 			elm_list_item_append(list, notification_list[1].name, NULL, NULL, file_item_fill_cb, &notification_list[1]);
 			elm_list_item_append(list, notification_list[2].name, NULL, NULL, preference_item_fill_cb, &notification_list[2]);
 			elm_list_item_append(list, notification_list[3].name, NULL, NULL, sensor_item_fill_cb, &notification_list[3]);
-			elm_list_item_append(list, notification_list[4].name, NULL, NULL, vibrator_item_fill_cb, &notification_list[4]);
+			elm_list_item_append(list, notification_list[4].name, NULL, NULL, mediarecorder_item_fill_cb, &notification_list[4]);
 
 	}
 	else if(STATE_COMMUNICATION == data->state)

@@ -85,14 +85,14 @@ typedef struct
 
 
 static String getSharedResourceFile(String x){
-  	String str=calloc(1024,sizeof(char));
+	String str=calloc(1024,sizeof(char));
 
-  	String sharedResRootPath=app_get_shared_resource_path();
-  	snprintf(str,1024,"%s%s",sharedResRootPath,x);
-  	free(sharedResRootPath);
+	String sharedResRootPath=app_get_shared_resource_path();
+	snprintf(str,1024,"%s%s",sharedResRootPath,x);
+	free(sharedResRootPath);
 
-  	return str;
-  }
+	return str;
+}
 notification_data *device_list_get(int *size){
 	static notification_data components[] =
 	{
@@ -100,7 +100,7 @@ notification_data *device_list_get(int *size){
 			{ "File", NULL,  0, 0, none, },
 			{ "Preference", NULL,  0, 0, none, },
 			{ "Sensor", NULL,  0, 0, none, },
-			{ "Vibrator", NULL,  0, 0, none, }
+			{ "MediaRecorder", NULL,  0, 0, none, }
 	};
 	*size = sizeof(components) / sizeof(components[0]);
 	return components;
@@ -134,12 +134,22 @@ notification_data *file_submodules_list_get(int *size){
 			{ "Video", NULL,  0, 0, none, },
 			{ "Audio", NULL,  0, 0, none, },
 			{ "Image", NULL,  0, 0, none, },
+			{ "Vibrator", NULL,  0, 0, none, }
+	};
+	*size = sizeof(components) / sizeof(components[0]);
+	return components;
+}
+
+notification_data *mediarecorder_list_get(int *size){
+	static notification_data components[] =
+	{
 			{ "CameraRecorder", NULL,  0, 0, none, },
 			{ "AudioRecorder", NULL,  0, 0, none, }
 	};
 	*size = sizeof(components) / sizeof(components[0]);
 	return components;
 }
+
 
 notification_data *preference_component_list_get(int *size){
 	static notification_data components[] =
@@ -258,15 +268,6 @@ void file_item_fill_cb(void *data, Evas_Object *obj, void *event_info)
 		evas_object_move(img, 240, 108);					// Move the given Evas object to the given location inside its canvas�� viewport
 		evas_object_resize(img, 240, 135);				// Change the size of the given Evas object
 	}
-	if(g_eo==NULL)
-	{
-
-		g_eo = evas_object_image_add(canvas);
-			         evas_object_image_size_set(g_eo, 240, 320);
-			         evas_object_image_fill_set(g_eo, 0, 320, 240, 320);
-			         evas_object_move(g_eo, 0,480);
-			         evas_object_resize(g_eo, 240, 320);
-	}
 
 	datas->name = notify_info->name;
 	datas->layout = ui_utils_layout_add(datas->navi, _layout_view_destroy2, datas);
@@ -294,8 +295,7 @@ void file_item_fill_cb(void *data, Evas_Object *obj, void *event_info)
 	elm_list_item_append(list,notification_list[1].name,NULL,NULL,video_view_layout_fill_cb,&notification_list[1]);
 	elm_list_item_append(list,notification_list[2].name,NULL,NULL,audio_view_layout_fill_cb,&notification_list[2]);
 	elm_list_item_append(list,notification_list[3].name,NULL,NULL,image_view_layout_fill_cb,&notification_list[3]);
-	elm_list_item_append(list,notification_list[4].name,NULL,NULL,camerarecorder_view_layout_fill_cb,&notification_list[4]);
-	elm_list_item_append(list,notification_list[5].name,NULL,NULL,audiorecorder_view_layout_fill_cb,&notification_list[5]);
+	elm_list_item_append(list,notification_list[4].name,NULL,NULL,vibrator_item_fill_cb,&notification_list[4]);
 
 
 
@@ -395,19 +395,19 @@ void sensor_item_fill_cb(void *data, Evas_Object *obj, void *event_info)
 	}
 
 
-		elm_list_item_append(list,notification_list[0].name,NULL,NULL,Accelerometer_item_fill_cb,&notification_list[0]);
-		elm_list_item_append(list,notification_list[1].name,NULL,NULL,Gravity_item_fill_cb,&notification_list[1]);
-		elm_list_item_append(list,notification_list[2].name,NULL,NULL,LinearAccelation_item_fill_cb,&notification_list[2]);
-		elm_list_item_append(list,notification_list[3].name,NULL,NULL,MagnetoMeter_item_fill_cb,&notification_list[3]);
-		elm_list_item_append(list,notification_list[4].name,NULL,NULL,RotationVector_item_fill_cb,&notification_list[4]);
-		elm_list_item_append(list,notification_list[5].name,NULL,NULL,Orientation_item_fill_cb,&notification_list[5]);
-		elm_list_item_append(list,notification_list[6].name,NULL,NULL,Gyroscope_item_fill_cb,&notification_list[6]);
-		elm_list_item_append(list,notification_list[7].name,NULL,NULL,Light_item_fill_cb,&notification_list[7]);
-		elm_list_item_append(list,notification_list[8].name,NULL,NULL,Proximity_item_fill_cb,&notification_list[8]);
-		elm_list_item_append(list,notification_list[9].name,NULL,NULL,Pressure_item_fill_cb,&notification_list[9]);
-		elm_list_item_append(list,notification_list[10].name,NULL,NULL,UltraViolet_item_fill_cb,&notification_list[10]);
-		elm_list_item_append(list,notification_list[11].name,NULL,NULL,Temperature_item_fill_cb,&notification_list[11]);
-		elm_list_item_append(list,notification_list[12].name,NULL,NULL,Humidity_item_fill_cb,&notification_list[12]);
+	elm_list_item_append(list,notification_list[0].name,NULL,NULL,Accelerometer_item_fill_cb,&notification_list[0]);
+	elm_list_item_append(list,notification_list[1].name,NULL,NULL,Gravity_item_fill_cb,&notification_list[1]);
+	elm_list_item_append(list,notification_list[2].name,NULL,NULL,LinearAccelation_item_fill_cb,&notification_list[2]);
+	elm_list_item_append(list,notification_list[3].name,NULL,NULL,MagnetoMeter_item_fill_cb,&notification_list[3]);
+	elm_list_item_append(list,notification_list[4].name,NULL,NULL,RotationVector_item_fill_cb,&notification_list[4]);
+	elm_list_item_append(list,notification_list[5].name,NULL,NULL,Orientation_item_fill_cb,&notification_list[5]);
+	elm_list_item_append(list,notification_list[6].name,NULL,NULL,Gyroscope_item_fill_cb,&notification_list[6]);
+	elm_list_item_append(list,notification_list[7].name,NULL,NULL,Light_item_fill_cb,&notification_list[7]);
+	elm_list_item_append(list,notification_list[8].name,NULL,NULL,Proximity_item_fill_cb,&notification_list[8]);
+	elm_list_item_append(list,notification_list[9].name,NULL,NULL,Pressure_item_fill_cb,&notification_list[9]);
+	elm_list_item_append(list,notification_list[10].name,NULL,NULL,UltraViolet_item_fill_cb,&notification_list[10]);
+	elm_list_item_append(list,notification_list[11].name,NULL,NULL,Temperature_item_fill_cb,&notification_list[11]);
+	elm_list_item_append(list,notification_list[12].name,NULL,NULL,Humidity_item_fill_cb,&notification_list[12]);
 
 
 
@@ -419,7 +419,63 @@ void sensor_item_fill_cb(void *data, Evas_Object *obj, void *event_info)
 	datas->navi_item = elm_naviframe_item_push(datas->navi, datas->name, NULL, NULL,datas->layout , NULL);
 
 }
+void mediarecorder_item_fill_cb(void *data, Evas_Object *obj, void *event_info)
+{
 
+	elm_list_item_selected_set(event_info, EINA_FALSE);
+	notification_data* notify_info=(notification_data*)data;
+	layout_view_data2 *datas = calloc(1, sizeof(layout_view_data2));
+	Evas_Object* lists=notify_info->status;
+
+	datas->navi = evas_object_data_get(lists, "view_data");
+
+	datas->name = notify_info->name;
+	datas->layout = ui_utils_layout_add(datas->navi, _layout_view_destroy2, datas);
+
+	if(!datas->layout)
+	{
+		free(datas);
+		return ;
+	}
+
+	if(canvas==NULL)
+			canvas = evas_object_evas_get(datas->navi);
+	if(g_eo==NULL)
+	{
+
+		g_eo = evas_object_image_add(canvas);
+		evas_object_image_size_set(g_eo, 240, 320);
+		evas_object_image_fill_set(g_eo, 0, 320, 240, 320);
+		evas_object_move(g_eo, 0,480);
+		evas_object_resize(g_eo, 240, 320);
+	}
+
+
+	Evas_Object* list= elm_list_add(datas->layout);
+
+	notification_data *notification_list = NULL;
+	int size=0;
+	//
+	notification_list=mediarecorder_list_get(&size);
+
+	for(int i=0;i<size;i++){
+
+		notification_list[i].status=lists;
+
+	}
+	elm_list_item_append(list,notification_list[0].name,NULL,NULL,camerarecorder_view_layout_fill_cb,&notification_list[0]);
+	elm_list_item_append(list,notification_list[1].name,NULL,NULL,audiorecorder_view_layout_fill_cb,&notification_list[1]);
+
+
+
+	evas_object_hide(elm_object_part_content_unset(datas->layout, "elm.swallow.content"));
+	elm_object_part_content_set(datas->layout, "elm.swallow.content", list);
+	evas_object_show(list);
+
+
+	datas->navi_item = elm_naviframe_item_push(datas->navi, datas->name, NULL, NULL,datas->layout , NULL);
+	//	_tab_view_layout_fill_cb2depth(data,obj,event_info);
+}
 
 void vibrator_item_fill_cb(void *data, Evas_Object *obj, void *event_info)
 {
@@ -463,6 +519,96 @@ void vibrator_item_fill_cb(void *data, Evas_Object *obj, void *event_info)
 	datas->navi_item = elm_naviframe_item_push(datas->navi, datas->name, NULL, NULL,datas->layout , NULL);
 	//	_tab_view_layout_fill_cb2depth(data,obj,event_info);
 }
+void camerarecorder_view_layout_fill_cb(void *data, Evas_Object *obj, void *event_info)
+{
+	elm_list_item_selected_set(event_info, EINA_FALSE);
+	notification_data* notify_info=(notification_data*)data;
+	layout_view_data2 *datas = calloc(1, sizeof(layout_view_data2));
+	Evas_Object* lists=notify_info->status;
+
+	datas->navi = evas_object_data_get(lists, "view_data");
+
+	datas->name = notify_info->name;
+	datas->layout = ui_utils_layout_add(datas->navi, _layout_view_destroy2, datas);
+
+	if(!datas->layout)
+	{
+		free(datas);
+		return ;
+	}
+
+
+	Evas_Object* list= elm_list_add(datas->layout);
+
+	notification_data *notification_list = NULL;
+	int size=0;
+	//
+	notification_list=camerarecorder_component_list_get(&size);
+
+
+	for(int i=0;i<size;i++){
+
+		notification_list[i].status=lists;
+		elm_list_item_append(list,notification_list[i].name,NULL,NULL,_tab_view_layout_fill_cb2depth,&notification_list[i]);
+
+	}
+
+
+	evas_object_hide(elm_object_part_content_unset(datas->layout, "elm.swallow.content"));
+	elm_object_part_content_set(datas->layout, "elm.swallow.content", list);
+	evas_object_show(list);
+
+
+	datas->navi_item = elm_naviframe_item_push(datas->navi, datas->name, NULL, NULL,datas->layout , NULL);
+	//	_tab_view_layout_fill_cb2depth(data,obj,event_info);
+}
+
+
+void audiorecorder_view_layout_fill_cb(void *data, Evas_Object *obj, void *event_info)
+{
+	elm_list_item_selected_set(event_info, EINA_FALSE);
+	notification_data* notify_info=(notification_data*)data;
+	layout_view_data2 *datas = calloc(1, sizeof(layout_view_data2));
+	Evas_Object* lists=notify_info->status;
+
+	datas->navi = evas_object_data_get(lists, "view_data");
+
+	datas->name = notify_info->name;
+	datas->layout = ui_utils_layout_add(datas->navi, _layout_view_destroy2, datas);
+
+	if(!datas->layout)
+	{
+		free(datas);
+		return ;
+	}
+
+
+	Evas_Object* list= elm_list_add(datas->layout);
+
+	notification_data *notification_list = NULL;
+	int size=0;
+	//
+	notification_list=audiorecorder_component_list_get(&size);
+
+
+	for(int i=0;i<size;i++){
+
+		notification_list[i].status=lists;
+		elm_list_item_append(list,notification_list[i].name,NULL,NULL,_tab_view_layout_fill_cb2depth,&notification_list[i]);
+
+	}
+
+
+	evas_object_hide(elm_object_part_content_unset(datas->layout, "elm.swallow.content"));
+	elm_object_part_content_set(datas->layout, "elm.swallow.content", list);
+	evas_object_show(list);
+
+
+	datas->navi_item = elm_naviframe_item_push(datas->navi, datas->name, NULL, NULL,datas->layout , NULL);
+}
+
+
+
 
 //function
 
@@ -637,19 +783,19 @@ void extractinfo(notification_data* data){
 void  getimageBurstId (notification_data* data){
 	Image image= image_get_instance();
 	if(((ImageExtends*)image)->imageMetaHandle){
-			String str =image->getBurstId(image);
+		String str =image->getBurstId(image);
 		snprintf(data->result_text,1024,"BurstID: %s",str?str:"(none)");
 
-		}
-		else{
-			snprintf(data->result_text,1024,"press extractImageInfo button first");
-		}
+	}
+	else{
+		snprintf(data->result_text,1024,"press extractImageInfo button first");
+	}
 }
 void  getimageMediaId (notification_data* data){
 	Image image= image_get_instance();
 	if(((ImageExtends*)image)->imageMetaHandle){
 		String str =image->getMediaId(image);
-	snprintf(data->result_text,1024,"MeiaID: %s",str?str:"(none)");
+		snprintf(data->result_text,1024,"MeiaID: %s",str?str:"(none)");
 
 	}
 	else{
@@ -662,7 +808,7 @@ void  getimageDateTaken (notification_data* data){
 	Image image= image_get_instance();
 	if(((ImageExtends*)image)->imageMetaHandle){
 		String str = image->getDateTaken(image);
-	snprintf(data->result_text,1024,"MeiaID: %s",str?str:"(none)");
+		snprintf(data->result_text,1024,"MeiaID: %s",str?str:"(none)");
 
 	}
 	else{
@@ -705,7 +851,7 @@ void deletefile(notification_data* data){
 
 	if(file->Delete("/opt/usr/media/Downloads/copied.jpg")==true){
 
-	sprintf(data->result_text,"/opt/usr/media/Downloads/copied.jpg<br>deleted");
+		sprintf(data->result_text,"/opt/usr/media/Downloads/copied.jpg<br>deleted");
 	}
 	else
 	{
@@ -714,27 +860,27 @@ void deletefile(notification_data* data){
 	DestroyFile(file);
 }
 void copyfile(notification_data* data){
-		File file = NewFile();
-		String srcfilepath=getSharedResourceFile("images/test.jpg");
+	File file = NewFile();
+	String srcfilepath=getSharedResourceFile("images/test.jpg");
 
-		if(file->Copy(srcfilepath,"/opt/usr/media/Downloads/copied.jpg")==true){
+	if(file->Copy(srcfilepath,"/opt/usr/media/Downloads/copied.jpg")==true){
 
 		sprintf(data->result_text,"%s"
 				"<br><br>copied to<br><br>"
 				"/opt/usr/media/Downloads/copied.jpg",srcfilepath);
 
-		}else{
-			sprintf(data->result_text,"copy source file:<br>%s doesn't exist",srcfilepath);
-		}
-		free(srcfilepath);
-		DestroyFile(file);
+	}else{
+		sprintf(data->result_text,"copy source file:<br>%s doesn't exist",srcfilepath);
+	}
+	free(srcfilepath);
+	DestroyFile(file);
 
 }
 void movefile(notification_data* data){
 	File file = NewFile();
 	if(file->Move("/opt/usr/media/Downloads/copied.jpg","/opt/usr/media/Downloads/moved.jpg")){
-	;
-	sprintf(data->result_text,"/opt/usr/media/Downloads/copied.jpg<br><br>moved to<br><br>/opt/usr/media/Downloads/moved.jpg");
+		;
+		sprintf(data->result_text,"/opt/usr/media/Downloads/copied.jpg<br><br>moved to<br><br>/opt/usr/media/Downloads/moved.jpg");
 	}
 	else
 	{
@@ -769,9 +915,9 @@ void playvideo(notification_data* data){
 
 	if(((VideoExtends*)v)->uri&&((VideoExtends*)v)->EvasObject)
 	{
-	evas_object_show(img);
-	v->Play(v);
-	sprintf(data->result_text,"video play");
+		evas_object_show(img);
+		v->Play(v);
+		sprintf(data->result_text,"video play");
 
 	}
 	else{
@@ -782,28 +928,28 @@ void pausevideo(notification_data* data){
 	Video v= video_get_instance();
 
 	if(((VideoExtends*)v)->uri&&((VideoExtends*)v)->EvasObject)
-		{
+	{
 		v->Pause(v);
 		sprintf(data->result_text,"video pause");
 
-		}
-		else{
-			sprintf(data->result_text,"press<br>setEvasObject button<br>setURI(Video) button<br>first");
-		}
+	}
+	else{
+		sprintf(data->result_text,"press<br>setEvasObject button<br>setURI(Video) button<br>first");
+	}
 }
 void stopvideo(notification_data* data){
 	Video v= video_get_instance();
 
 	if(((VideoExtends*)v)->uri&&((VideoExtends*)v)->EvasObject)
-		{
+	{
 		v->Stop(v);
-			evas_object_hide(img);
-			sprintf(data->result_text,"video stop and hide");
+		evas_object_hide(img);
+		sprintf(data->result_text,"video stop and hide");
 
-		}
-		else{
-			sprintf(data->result_text,"press<br>setEvasObject button<br>setURI(Video) button<br>first");
-		}
+	}
+	else{
+		sprintf(data->result_text,"press<br>setEvasObject button<br>setURI(Video) button<br>first");
+	}
 }
 
 void getvideoinfo(notification_data* data){
@@ -1003,35 +1149,40 @@ CameraRecorder CameraRecorder_get_instance(){
 	static CameraRecorder cr =NULL;
 	if(cr==NULL)
 		cr=  NewCameraRecroder();
-		return cr;
+	return cr;
+}
+
+
+void camerarecorderinit(notification_data* data){
+	CameraRecorder cr = CameraRecorder_get_instance();
+	cr->Init(cr,"/opt/usr/media/Videos/VIDEO_RECORDED.mp4", CAMERA_BACK, g_eo);
+}
+void camerarecorderstart(notification_data* data){
+	CameraRecorder cr = CameraRecorder_get_instance();
+	bool b =cr->Start(cr);
+	if (b==true)
+		evas_object_show(g_eo);
+
+}
+void camerarecorderpause(notification_data* data){
+	CameraRecorder cr = CameraRecorder_get_instance();
+	cr->Pause(cr);
+}
+void camerarecorderend(notification_data* data){
+
+	CameraRecorder cr = CameraRecorder_get_instance();
+	bool b= cr->End(cr);
+	if (b == true)
+	{
+		evas_object_hide(g_eo);
 	}
 
-
- void camerarecorderinit(notification_data* data){
-	 evas_object_show(g_eo);
-	 CameraRecorder cr = CameraRecorder_get_instance();
-	 cr->Init(cr,"/opt/usr/media/Videos/VIDEO_RECORDED.mp4", CAMERA_BACK, g_eo);
- }
- void camerarecorderstart(notification_data* data){
-	 CameraRecorder cr = CameraRecorder_get_instance();
-	 cr->Start(cr);
- }
- void camerarecorderpause(notification_data* data){
-	 CameraRecorder cr = CameraRecorder_get_instance();
-	 cr->Pause(cr);
- }
- void camerarecorderend(notification_data* data){
-
-	 CameraRecorder cr = CameraRecorder_get_instance();
-	if( cr->End(cr))
-		evas_object_hide(g_eo);
-
- }
- void camerarecordercancel(notification_data* data){
-	 evas_object_hide(g_eo);
-	 CameraRecorder cr = CameraRecorder_get_instance();
-	 cr->Cancel(cr);
- }
+}
+void camerarecordercancel(notification_data* data){
+	evas_object_hide(g_eo);
+	CameraRecorder cr = CameraRecorder_get_instance();
+	cr->Cancel(cr);
+}
 
 AudioRecorder audiorec_get_instance(){
 	static AudioRecorder pa=NULL;
@@ -1042,28 +1193,26 @@ AudioRecorder audiorec_get_instance(){
 	return pa;
 }
 
- void audiorecorderinit(notification_data* data){
-	 AudioRecorder pa=audiorec_get_instance();
-	 pa->Init(pa,"/opt/usr/media/Sounds/recorded.mp4");
- }
- void audiorecorderstart(notification_data* data){
-	 AudioRecorder pa=audiorec_get_instance();
-	 pa->Start(pa);
- }
- void audiorecorderpause(notification_data* data){
-	 AudioRecorder pa=audiorec_get_instance();
-	 pa->Pause(pa);
+void audiorecorderinit(notification_data* data){
+	AudioRecorder pa=audiorec_get_instance();
+	pa->Init(pa,"/opt/usr/media/Sounds/AUDIO_RECORDED.mp4");
+}
+void audiorecorderstart(notification_data* data){
+	AudioRecorder pa=audiorec_get_instance();
+	pa->Start(pa);
+}
+void audiorecorderpause(notification_data* data){
+	AudioRecorder pa=audiorec_get_instance();
+	pa->Pause(pa);
 
- }
- void audiorecorderend(notification_data* data){
-	 AudioRecorder pa=audiorec_get_instance();
-
-	 pa->End(pa);
- }
- void audiorecordercancel(notification_data* data){
-	 AudioRecorder pa=audiorec_get_instance();
-
-	 pa->Cancel(pa);
- }
+}
+void audiorecorderend(notification_data* data){
+	AudioRecorder pa=audiorec_get_instance();
+	pa->End(pa);
+}
+void audiorecordercancel(notification_data* data){
+	AudioRecorder pa=audiorec_get_instance();
+	pa->Cancel(pa);
+}
 
 

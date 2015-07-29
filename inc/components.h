@@ -19,6 +19,7 @@
 
  notification_data *device_list_get(int *size);
  notification_data *devicestatus_list_get(int *size);
+ notification_data *mediarecorder_list_get(int *size);
  notification_data *file_submodules_list_get(int *size);
  notification_data *preference_component_list_get(int *size);
  notification_data *sensor_component_list_get(int *size);
@@ -29,6 +30,9 @@
  notification_data *notification_component_list_get(int *size);
  notification_data *ongoingnotification_component_list_get(int *size);
 
+ notification_data *camerarecorder_component_list_get(int *size);
+ notification_data *audiorecorder_component_list_get(int *size);
+
  //cb session
   void log_fill_item_cb(void *data, Evas_Object *obj, void *event_info);
   void notification_item_fill_cb(void *data, Evas_Object *obj, void *event_info);
@@ -38,7 +42,7 @@
   void file_item_fill_cb(void *data, Evas_Object *obj, void *event_info);
   void preference_item_fill_cb(void *data, Evas_Object *obj, void *event_info);
   void sensor_item_fill_cb(void *data, Evas_Object *obj, void *event_info);
-  void vibrator_item_fill_cb(void *data, Evas_Object *obj, void *event_info);
+  void mediarecorder_item_fill_cb(void *data, Evas_Object *obj, void *event_info);
 
   void bouetooth_fill_item_cb(void *data, Evas_Object *obj, void *event_info);
   void gps_fill_item_cb(void *data, Evas_Object *obj, void *event_info);
@@ -65,6 +69,8 @@
   void video_view_layout_fill_cb(void *data, Evas_Object *obj, void *event_info);
   void audio_view_layout_fill_cb(void *data, Evas_Object *obj, void *event_info);
   void image_view_layout_fill_cb(void *data, Evas_Object *obj, void *event_info);
+  void vibrator_item_fill_cb(void *data, Evas_Object *obj, void *event_info);
+
   void camerarecorder_view_layout_fill_cb(void *data, Evas_Object *obj, void *event_info);
   void audiorecorder_view_layout_fill_cb(void *data, Evas_Object *obj, void *event_info);
 
