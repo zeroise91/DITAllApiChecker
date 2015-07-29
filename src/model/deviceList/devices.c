@@ -169,7 +169,6 @@ notification_data *sensor_component_list_get(int *size){
 			{ "MagnetoMeter", NULL,  0, 0, none, },
 			{ "RotationVector", NULL,  0, 0, none, },
 			{ "Orientation", NULL,  0, 0, none, },
-			{ "Gravity", NULL,  0, 0, none, },
 			{ "Gyroscope", NULL,  0, 0, none, },
 			{ "Light", NULL,  0, 0, none, },
 			{ "Proximity", NULL,  0, 0, none, },
@@ -396,61 +395,22 @@ void sensor_item_fill_cb(void *data, Evas_Object *obj, void *event_info)
 
 	}
 
-	Accelerometer a=NewAccelerometer();
-	Gravity b=NewGravity();
-	LinearAccelation c = NewLinearAccelation();
-	Magnetometer d= NewMagnetometer();
-	RotationVector e= NewRotationVector();
-	Orientation f= NewOrientation();
-	Gyroscope g= NewGyroscope();
-	Light h= NewLight();
-	Proximity i = NewProximity();
-	Pressure j= NewPressure();
-	UltraViolet k= NewUltraViolet();
-	Temperature l = NewTemperature();
-	Humidity m = NewHumidity();
 
-	if(a!=NULL)
 		elm_list_item_append(list,notification_list[0].name,NULL,NULL,Accelerometer_item_fill_cb,&notification_list[0]);
-	if(b!=NULL)
 		elm_list_item_append(list,notification_list[1].name,NULL,NULL,Gravity_item_fill_cb,&notification_list[1]);
-	if(c!=NULL)
 		elm_list_item_append(list,notification_list[2].name,NULL,NULL,LinearAccelation_item_fill_cb,&notification_list[2]);
-	if(d!=NULL)
 		elm_list_item_append(list,notification_list[3].name,NULL,NULL,MagnetoMeter_item_fill_cb,&notification_list[3]);
-	if(e!=NULL)
 		elm_list_item_append(list,notification_list[4].name,NULL,NULL,RotationVector_item_fill_cb,&notification_list[4]);
-	if(f!=NULL)
 		elm_list_item_append(list,notification_list[5].name,NULL,NULL,Orientation_item_fill_cb,&notification_list[5]);
-	if(g!=NULL)
 		elm_list_item_append(list,notification_list[6].name,NULL,NULL,Gyroscope_item_fill_cb,&notification_list[6]);
-	if(h!=NULL)
 		elm_list_item_append(list,notification_list[7].name,NULL,NULL,Light_item_fill_cb,&notification_list[7]);
-	if(i!=NULL)
 		elm_list_item_append(list,notification_list[8].name,NULL,NULL,Proximity_item_fill_cb,&notification_list[8]);
-	if(j!=NULL)
 		elm_list_item_append(list,notification_list[9].name,NULL,NULL,Pressure_item_fill_cb,&notification_list[9]);
-	if(k!=NULL)
 		elm_list_item_append(list,notification_list[10].name,NULL,NULL,UltraViolet_item_fill_cb,&notification_list[10]);
-	if(l!=NULL)
 		elm_list_item_append(list,notification_list[11].name,NULL,NULL,Temperature_item_fill_cb,&notification_list[11]);
-	if(m!=NULL)
 		elm_list_item_append(list,notification_list[12].name,NULL,NULL,Humidity_item_fill_cb,&notification_list[12]);
 
 
-	DestroyAccelerometer(a);
-	DestroyGravity(b);
-	DestroyLinearAccelation(c);
-	DestroyMagnetometer(d);
-	DestroyRotationVector(e);
-	DestroyOrientation(f);
-	DestroyGyroscope(g);
-	DestroyLight(h);
-	DestroyProximity(i);
-	DestroyPressure(j);
-	DestroyUltraViolet(k);
-	DestroyTemperature(l);
-	DestroyHumidity(m);
 
 	evas_object_hide(elm_object_part_content_unset(datas->layout, "elm.swallow.content"));
 	elm_object_part_content_set(datas->layout, "elm.swallow.content", list);

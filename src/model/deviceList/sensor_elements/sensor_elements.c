@@ -931,25 +931,77 @@ void accCALLBACK(sensor_h sensor, sensor_event_s *event, void *user_data){
 
 void accaddCallback(notification_data *data){
 	Accelerometer pA= Accelerometer_get_Instance();
-	pA->addCallback(pA,accCALLBACK,100,data);
-	snprintf(data->result_text,1024,"add callback completed");
+	if(pA->isSupported(pA)){
+	bool b=pA->addCallback(pA,accCALLBACK,100,data);
+	if (b)
+	{
+	snprintf(data->result_text,1024,"ACCELEROMETER add callback completed");
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"ACCELEROMETER add callback fail");
+	}
+
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"device doesn't support ACCELEROMETER");
+	}
 }
 void accdatachCallback(notification_data *data){
 	Accelerometer pA= Accelerometer_get_Instance();
-	pA->detachCallback(pA);
-	snprintf(data->result_text,1024,"detach callback completed");
+	if(pA->isSupported(pA)){
+	bool b=pA->detachCallback(pA);
+	if (b)
+	{
+		snprintf(data->result_text,1024,"ACCELEROMETER detach callback completed");
+	}
+		snprintf(data->result_text,1024,"ACCELEROMETER detach callback fail");
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"device doesn't support ACCELEROMETER");
+	}
 }
 
 void accon(notification_data *data){
 	Accelerometer pA= Accelerometer_get_Instance();
-	pA->On(pA);
-}
+	if(pA->isSupported(pA)){
+	bool b=pA->On(pA);
+	if(b)
+	{
+		snprintf(data->result_text,1024,"ACCELEROMETER On OK");
+
+	}else
+	{
+		snprintf(data->result_text,1024,"ACCELEROMETER On failed");
+
+	}
+	}
+	else
+		{
+			snprintf(data->result_text,1024,"device doesn't support ACCELEROMETER");
+		}
+	}
 void accoff(notification_data *data){
 	Accelerometer pA= Accelerometer_get_Instance();
-	pA->Off(pA);
-	LOGI("OFF called");
-}
+	if(pA->isSupported(pA)){
+	bool b=pA->Off(pA);
+	if(b)
+	{
+		snprintf(data->result_text,1024,"AcceACCELEROMETERlerometer Off OK");
 
+	}else
+	{
+		snprintf(data->result_text,1024,"ACCELEROMETER Off failed");
+
+	}
+	}
+	else
+		{
+			snprintf(data->result_text,1024,"device doesn't support ACCELEROMETER");
+		}
+}
 
 void accisSupported(notification_data* data){
 	Accelerometer pA= Accelerometer_get_Instance();
@@ -959,6 +1011,8 @@ void accisSupported(notification_data* data){
 
 void accgetValue(notification_data* data){
 	Accelerometer pA= Accelerometer_get_Instance();
+
+	if(pA->isSupported(pA)){
 	Accelerometer_data vs= pA->getValue(pA);
 
 	if(vs.accuracy!=0)
@@ -976,10 +1030,15 @@ void accgetValue(notification_data* data){
 	{
 		snprintf(data->result_text,1024,"Sensor is off");
 	}
-	LOGI("%.2f",vs.x);
-	LOGI("%.2f",vs.y);
-	LOGI("%.2f",vs.z);
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"device doesn't support ACCELEROMETER");
+
+	}
+
 }
+
 
 void GravityCALLBACK(sensor_h sensor, sensor_event_s *event, void *user_data){
 
@@ -999,26 +1058,78 @@ void GravityCALLBACK(sensor_h sensor, sensor_event_s *event, void *user_data){
 
 }
 
-
 void GravityaddCallback(notification_data *data){
 	Gravity pA= Gravity_get_Instance();
-	pA->addCallback(pA,GravityCALLBACK,100,data);
-	snprintf(data->result_text,1024,"add callback completed");
+	if(pA->isSupported(pA)){
+	bool b=pA->addCallback(pA,accCALLBACK,100,data);
+	if (b)
+	{
+	snprintf(data->result_text,1024,"Gravity add callback completed");
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"Gravity add callback fail");
+	}
+
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"device doesn't support Gravity");
+	}
 }
 void GravitydatachCallback(notification_data *data){
 	Gravity pA= Gravity_get_Instance();
-	pA->detachCallback(pA);
-	snprintf(data->result_text,1024,"detach callback completed");
+	if(pA->isSupported(pA)){
+	bool b=pA->detachCallback(pA);
+	if (b)
+	{
+		snprintf(data->result_text,1024,"Gravity detach callback completed");
+	}
+		snprintf(data->result_text,1024,"Gravity detach callback fail");
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"device doesn't support Gravity");
+	}
 }
 
 void Gravityon(notification_data *data){
 	Gravity pA= Gravity_get_Instance();
-	pA->On(pA);
-}
+	if(pA->isSupported(pA)){
+	bool b=pA->On(pA);
+	if(b)
+	{
+		snprintf(data->result_text,1024,"Gravity On OK");
+
+	}else
+	{
+		snprintf(data->result_text,1024,"Gravity On failed");
+
+	}
+	}
+	else
+		{
+			snprintf(data->result_text,1024,"device doesn't support Gravity");
+		}
+	}
 void Gravityoff(notification_data *data){
 	Gravity pA= Gravity_get_Instance();
-	pA->Off(pA);
-	LOGI("OFF called");
+	if(pA->isSupported(pA)){
+	bool b=pA->Off(pA);
+	if(b)
+	{
+		snprintf(data->result_text,1024,"Gravity Off OK");
+
+	}else
+	{
+		snprintf(data->result_text,1024,"Gravity Off failed");
+
+	}
+	}
+	else
+		{
+			snprintf(data->result_text,1024,"device doesn't support Gravity");
+		}
 }
 
 
@@ -1028,15 +1139,19 @@ void GravityisSupported(notification_data* data){
 	snprintf(data->result_text,1024,"%s",x?"supports":"do not supports");
 }
 
+
 void GravitygetValue(notification_data* data){
 	Gravity pA= Gravity_get_Instance();
+
+	if(pA->isSupported(pA)){
 	Gravity_data vs= pA->getValue(pA);
+
 	if(vs.accuracy!=0)
 	{
 		snprintf(data->result_text,1024,
 				"timestamp: %llu<br>"
 				"value_count: %d<br>"
-				"Gravityurancy: %d<br>"
+				"accurancy: %d<br>"
 				"x: %f<br>"
 				"y: %f<br>"
 				"z: %f<br>",
@@ -1046,11 +1161,15 @@ void GravitygetValue(notification_data* data){
 	{
 		snprintf(data->result_text,1024,"Sensor is off");
 	}
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"device doesn't support Gravity");
 
-	LOGI("%.2f",vs.x);
-	LOGI("%.2f",vs.y);
-	LOGI("%.2f",vs.z);
+	}
+
 }
+
 
 void LinearAccelationCALLBACK(sensor_h sensor, sensor_event_s *event, void *user_data){
 
@@ -1070,26 +1189,78 @@ void LinearAccelationCALLBACK(sensor_h sensor, sensor_event_s *event, void *user
 
 }
 
-
 void LinearAccelationaddCallback(notification_data *data){
 	LinearAccelation pA= LinearAccelation_get_Instance();
-	pA->addCallback(pA,LinearAccelationCALLBACK,100,data);
-	snprintf(data->result_text,1024,"add callback completed");
+	if(pA->isSupported(pA)){
+	bool b=pA->addCallback(pA,accCALLBACK,100,data);
+	if (b)
+	{
+	snprintf(data->result_text,1024,"LinearAccelation add callback completed");
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"LinearAccelation add callback fail");
+	}
+
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"device doesn't support LinearAccelation");
+	}
 }
 void LinearAccelationdatachCallback(notification_data *data){
 	LinearAccelation pA= LinearAccelation_get_Instance();
-	pA->detachCallback(pA);
-	snprintf(data->result_text,1024,"detach callback completed");
+	if(pA->isSupported(pA)){
+	bool b=pA->detachCallback(pA);
+	if (b)
+	{
+		snprintf(data->result_text,1024,"LinearAccelation detach callback completed");
+	}
+		snprintf(data->result_text,1024,"LinearAccelation detach callback fail");
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"device doesn't support LinearAccelation");
+	}
 }
 
 void LinearAccelationon(notification_data *data){
 	LinearAccelation pA= LinearAccelation_get_Instance();
-	pA->On(pA);
-}
+	if(pA->isSupported(pA)){
+	bool b=pA->On(pA);
+	if(b)
+	{
+		snprintf(data->result_text,1024,"LinearAccelation On OK");
+
+	}else
+	{
+		snprintf(data->result_text,1024,"LinearAccelation On failed");
+
+	}
+	}
+	else
+		{
+			snprintf(data->result_text,1024,"device doesn't support LinearAccelation");
+		}
+	}
 void LinearAccelationoff(notification_data *data){
 	LinearAccelation pA= LinearAccelation_get_Instance();
-	pA->Off(pA);
-	LOGI("OFF called");
+	if(pA->isSupported(pA)){
+	bool b=pA->Off(pA);
+	if(b)
+	{
+		snprintf(data->result_text,1024,"LinearAccelation Off OK");
+
+	}else
+	{
+		snprintf(data->result_text,1024,"LinearAccelation Off failed");
+
+	}
+	}
+	else
+		{
+			snprintf(data->result_text,1024,"device doesn't support LinearAccelation");
+		}
 }
 
 
@@ -1099,15 +1270,20 @@ void LinearAccelationisSupported(notification_data* data){
 	snprintf(data->result_text,1024,"%s",x?"supports":"do not supports");
 }
 
+
+
 void LinearAccelationgetValue(notification_data* data){
 	LinearAccelation pA= LinearAccelation_get_Instance();
-	LinearAcceleration_data vs= pA->getValue(pA);
+
+	if(pA->isSupported(pA)){
+	LinearAccelation_data vs= pA->getValue(pA);
+
 	if(vs.accuracy!=0)
 	{
 		snprintf(data->result_text,1024,
 				"timestamp: %llu<br>"
 				"value_count: %d<br>"
-				"LinearAccelationurancy: %d<br>"
+				"accurancy: %d<br>"
 				"x: %f<br>"
 				"y: %f<br>"
 				"z: %f<br>",
@@ -1117,10 +1293,15 @@ void LinearAccelationgetValue(notification_data* data){
 	{
 		snprintf(data->result_text,1024,"Sensor is off");
 	}
-	LOGI("%.2f",vs.x);
-	LOGI("%.2f",vs.y);
-	LOGI("%.2f",vs.z);
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"device doesn't support LinearAccelation");
+
+	}
+
 }
+
 
 void MagnetoMeterCALLBACK(sensor_h sensor, sensor_event_s *event, void *user_data){
 
@@ -1143,23 +1324,76 @@ void MagnetoMeterCALLBACK(sensor_h sensor, sensor_event_s *event, void *user_dat
 
 void MagnetoMeteraddCallback(notification_data *data){
 	Magnetometer pA= MagnetoMeter_get_Instance();
-	pA->addCallback(pA,MagnetoMeterCALLBACK,100,data);
-	snprintf(data->result_text,1024,"add callback completed");
+	if(pA->isSupported(pA)){
+	bool b=pA->addCallback(pA,accCALLBACK,100,data);
+	if (b)
+	{
+	snprintf(data->result_text,1024,"MagnetoMeter add callback completed");
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"MagnetoMeter add callback fail");
+	}
+
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"device doesn't support MagnetoMeter");
+	}
 }
 void MagnetoMeterdatachCallback(notification_data *data){
 	Magnetometer pA= MagnetoMeter_get_Instance();
-	pA->detachCallback(pA);
-	snprintf(data->result_text,1024,"detach callback completed");
+	if(pA->isSupported(pA)){
+	bool b=pA->detachCallback(pA);
+	if (b)
+	{
+		snprintf(data->result_text,1024,"MagnetoMeter detach callback completed");
+	}
+		snprintf(data->result_text,1024,"MagnetoMeter detach callback fail");
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"device doesn't support MagnetoMeter");
+	}
 }
 
 void MagnetoMeteron(notification_data *data){
 	Magnetometer pA= MagnetoMeter_get_Instance();
-	pA->On(pA);
-}
+	if(pA->isSupported(pA)){
+	bool b=pA->On(pA);
+	if(b)
+	{
+		snprintf(data->result_text,1024,"MagnetoMeter On OK");
+
+	}else
+	{
+		snprintf(data->result_text,1024,"MagnetoMeter On failed");
+
+	}
+	}
+	else
+		{
+			snprintf(data->result_text,1024,"device doesn't support MagnetoMeter");
+		}
+	}
 void MagnetoMeteroff(notification_data *data){
 	Magnetometer pA= MagnetoMeter_get_Instance();
-	pA->Off(pA);
-	LOGI("OFF called");
+	if(pA->isSupported(pA)){
+	bool b=pA->Off(pA);
+	if(b)
+	{
+		snprintf(data->result_text,1024,"MagnetoMeter Off OK");
+
+	}else
+	{
+		snprintf(data->result_text,1024,"MagnetoMeter Off failed");
+
+	}
+	}
+	else
+		{
+			snprintf(data->result_text,1024,"device doesn't support MagnetoMeter");
+		}
 }
 
 
@@ -1169,15 +1403,19 @@ void MagnetoMeterisSupported(notification_data* data){
 	snprintf(data->result_text,1024,"%s",x?"supports":"do not supports");
 }
 
+
 void MagnetoMetergetValue(notification_data* data){
-	Magnetometer pA= MagnetoMeter_get_Instance();
-	Magnetometer_data vs= pA->getValue(pA);
+	MagnetoMeter pA= MagnetoMeter_get_Instance();
+
+	if(pA->isSupported(pA)){
+	MagnetoMeter_data vs= pA->getValue(pA);
+
 	if(vs.accuracy!=0)
 	{
 		snprintf(data->result_text,1024,
 				"timestamp: %llu<br>"
 				"value_count: %d<br>"
-				"MagnetoMeterurancy: %d<br>"
+				"accurancy: %d<br>"
 				"x: %f<br>"
 				"y: %f<br>"
 				"z: %f<br>",
@@ -1187,10 +1425,15 @@ void MagnetoMetergetValue(notification_data* data){
 	{
 		snprintf(data->result_text,1024,"Sensor is off");
 	}
-	LOGI("%.2f",vs.x);
-	LOGI("%.2f",vs.y);
-	LOGI("%.2f",vs.z);
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"device doesn't support MagnetoMeter");
+
+	}
+
 }
+
 
 void RotationVectorCALLBACK(sensor_h sensor, sensor_event_s *event, void *user_data){
 
@@ -1210,26 +1453,78 @@ void RotationVectorCALLBACK(sensor_h sensor, sensor_event_s *event, void *user_d
 
 }
 
-
 void RotationVectoraddCallback(notification_data *data){
 	RotationVector pA= RotationVector_get_Instance();
-	pA->addCallback(pA,RotationVectorCALLBACK,100,data);
-	snprintf(data->result_text,1024,"add callback completed");
+	if(pA->isSupported(pA)){
+	bool b=pA->addCallback(pA,accCALLBACK,100,data);
+	if (b)
+	{
+	snprintf(data->result_text,1024,"RotationVector add callback completed");
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"RotationVector add callback fail");
+	}
+
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"device doesn't support RotationVector");
+	}
 }
 void RotationVectordatachCallback(notification_data *data){
 	RotationVector pA= RotationVector_get_Instance();
-	pA->detachCallback(pA);
-	snprintf(data->result_text,1024,"detach callback completed");
+	if(pA->isSupported(pA)){
+	bool b=pA->detachCallback(pA);
+	if (b)
+	{
+		snprintf(data->result_text,1024,"RotationVector detach callback completed");
+	}
+		snprintf(data->result_text,1024,"RotationVector detach callback fail");
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"device doesn't support RotationVector");
+	}
 }
 
 void RotationVectoron(notification_data *data){
 	RotationVector pA= RotationVector_get_Instance();
-	pA->On(pA);
-}
+	if(pA->isSupported(pA)){
+	bool b=pA->On(pA);
+	if(b)
+	{
+		snprintf(data->result_text,1024,"RotationVector On OK");
+
+	}else
+	{
+		snprintf(data->result_text,1024,"RotationVector On failed");
+
+	}
+	}
+	else
+		{
+			snprintf(data->result_text,1024,"device doesn't support RotationVector");
+		}
+	}
 void RotationVectoroff(notification_data *data){
 	RotationVector pA= RotationVector_get_Instance();
-	pA->Off(pA);
-	LOGI("OFF called");
+	if(pA->isSupported(pA)){
+	bool b=pA->Off(pA);
+	if(b)
+	{
+		snprintf(data->result_text,1024,"RotationVector Off OK");
+
+	}else
+	{
+		snprintf(data->result_text,1024,"RotationVector Off failed");
+
+	}
+	}
+	else
+		{
+			snprintf(data->result_text,1024,"device doesn't support RotationVector");
+		}
 }
 
 
@@ -1239,28 +1534,39 @@ void RotationVectorisSupported(notification_data* data){
 	snprintf(data->result_text,1024,"%s",x?"supports":"do not supports");
 }
 
+
+
 void RotationVectorgetValue(notification_data* data){
 	RotationVector pA= RotationVector_get_Instance();
+
+	if(pA->isSupported(pA)){
 	RotationVector_data vs= pA->getValue(pA);
+
 	if(vs.accuracy!=0)
 	{
 		snprintf(data->result_text,1024,
 				"timestamp: %llu<br>"
 				"value_count: %d<br>"
-				"RotationVectorurancy: %d<br>"
+				"accurancy: %d<br>"
 				"x: %f<br>"
 				"y: %f<br>"
-				"z: %f<br>",
-				vs.timestamp,vs.value_count,vs.accuracy,vs.x,vs.y,vs.z);}
+				"z: %f<br>"
+				"w: %f<br>",
+				vs.timestamp,vs.value_count,vs.accuracy,vs.x,vs.y,vs.z,vs.w);
+	}
 	else
 	{
 		snprintf(data->result_text,1024,"Sensor is off");
 	}
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"device doesn't support RotationVector");
 
-	LOGI("%.2f",vs.x);
-	LOGI("%.2f",vs.y);
-	LOGI("%.2f",vs.z);
+	}
+
 }
+
 
 
 void OrientationCALLBACK(sensor_h sensor, sensor_event_s *event, void *user_data){
@@ -1281,26 +1587,78 @@ void OrientationCALLBACK(sensor_h sensor, sensor_event_s *event, void *user_data
 
 }
 
-
 void OrientationaddCallback(notification_data *data){
 	Orientation pA= Orientation_get_Instance();
-	pA->addCallback(pA,OrientationCALLBACK,100,data);
-	snprintf(data->result_text,1024,"add callback completed");
+	if(pA->isSupported(pA)){
+	bool b=pA->addCallback(pA,accCALLBACK,100,data);
+	if (b)
+	{
+	snprintf(data->result_text,1024,"Orientation add callback completed");
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"Orientation add callback fail");
+	}
+
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"device doesn't support Orientation");
+	}
 }
 void OrientationdatachCallback(notification_data *data){
 	Orientation pA= Orientation_get_Instance();
-	pA->detachCallback(pA);
-	snprintf(data->result_text,1024,"detach callback completed");
+	if(pA->isSupported(pA)){
+	bool b=pA->detachCallback(pA);
+	if (b)
+	{
+		snprintf(data->result_text,1024,"Orientation detach callback completed");
+	}
+		snprintf(data->result_text,1024,"Orientation detach callback fail");
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"device doesn't support Orientation");
+	}
 }
 
 void Orientationon(notification_data *data){
 	Orientation pA= Orientation_get_Instance();
-	pA->On(pA);
-}
+	if(pA->isSupported(pA)){
+	bool b=pA->On(pA);
+	if(b)
+	{
+		snprintf(data->result_text,1024,"Orientation On OK");
+
+	}else
+	{
+		snprintf(data->result_text,1024,"Orientation On failed");
+
+	}
+	}
+	else
+		{
+			snprintf(data->result_text,1024,"device doesn't support Orientation");
+		}
+	}
 void Orientationoff(notification_data *data){
 	Orientation pA= Orientation_get_Instance();
-	pA->Off(pA);
-	LOGI("OFF called");
+	if(pA->isSupported(pA)){
+	bool b=pA->Off(pA);
+	if(b)
+	{
+		snprintf(data->result_text,1024,"Orientation Off OK");
+
+	}else
+	{
+		snprintf(data->result_text,1024,"Orientation Off failed");
+
+	}
+	}
+	else
+		{
+			snprintf(data->result_text,1024,"device doesn't support Orientation");
+		}
 }
 
 
@@ -1310,15 +1668,20 @@ void OrientationisSupported(notification_data* data){
 	snprintf(data->result_text,1024,"%s",x?"supports":"do not supports");
 }
 
+
+
 void OrientationgetValue(notification_data* data){
 	Orientation pA= Orientation_get_Instance();
+
+	if(pA->isSupported(pA)){
 	Orientation_data vs= pA->getValue(pA);
+
 	if(vs.accuracy!=0)
 	{
 		snprintf(data->result_text,1024,
 				"timestamp: %llu<br>"
 				"value_count: %d<br>"
-				"Orientationurancy: %d<br>"
+				"accurancy: %d<br>"
 				"x: %f<br>"
 				"y: %f<br>"
 				"z: %f<br>",
@@ -1328,10 +1691,15 @@ void OrientationgetValue(notification_data* data){
 	{
 		snprintf(data->result_text,1024,"Sensor is off");
 	}
-	LOGI("%.2f",vs.x);
-	LOGI("%.2f",vs.y);
-	LOGI("%.2f",vs.z);
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"device doesn't support Orientation");
+
+	}
+
 }
+
 
 void GyroscopeCALLBACK(sensor_h sensor, sensor_event_s *event, void *user_data){
 
@@ -1351,26 +1719,78 @@ void GyroscopeCALLBACK(sensor_h sensor, sensor_event_s *event, void *user_data){
 
 }
 
-
 void GyroscopeaddCallback(notification_data *data){
 	Gyroscope pA= Gyroscope_get_Instance();
-	pA->addCallback(pA,GyroscopeCALLBACK,100,data);
-	snprintf(data->result_text,1024,"add callback completed");
+	if(pA->isSupported(pA)){
+	bool b=pA->addCallback(pA,accCALLBACK,100,data);
+	if (b)
+	{
+	snprintf(data->result_text,1024,"Gyroscope add callback completed");
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"Gyroscope add callback fail");
+	}
+
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"device doesn't support Gyroscope");
+	}
 }
 void GyroscopedatachCallback(notification_data *data){
 	Gyroscope pA= Gyroscope_get_Instance();
-	pA->detachCallback(pA);
-	snprintf(data->result_text,1024,"detach callback completed");
+	if(pA->isSupported(pA)){
+	bool b=pA->detachCallback(pA);
+	if (b)
+	{
+		snprintf(data->result_text,1024,"Gyroscope detach callback completed");
+	}
+		snprintf(data->result_text,1024,"Gyroscope detach callback fail");
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"device doesn't support Gyroscope");
+	}
 }
 
 void Gyroscopeon(notification_data *data){
 	Gyroscope pA= Gyroscope_get_Instance();
-	pA->On(pA);
-}
+	if(pA->isSupported(pA)){
+	bool b=pA->On(pA);
+	if(b)
+	{
+		snprintf(data->result_text,1024,"Gyroscope On OK");
+
+	}else
+	{
+		snprintf(data->result_text,1024,"Gyroscope On failed");
+
+	}
+	}
+	else
+		{
+			snprintf(data->result_text,1024,"device doesn't support Gyroscope");
+		}
+	}
 void Gyroscopeoff(notification_data *data){
 	Gyroscope pA= Gyroscope_get_Instance();
-	pA->Off(pA);
-	LOGI("OFF called");
+	if(pA->isSupported(pA)){
+	bool b=pA->Off(pA);
+	if(b)
+	{
+		snprintf(data->result_text,1024,"Gyroscope Off OK");
+
+	}else
+	{
+		snprintf(data->result_text,1024,"Gyroscope Off failed");
+
+	}
+	}
+	else
+		{
+			snprintf(data->result_text,1024,"device doesn't support Gyroscope");
+		}
 }
 
 
@@ -1380,15 +1800,21 @@ void GyroscopeisSupported(notification_data* data){
 	snprintf(data->result_text,1024,"%s",x?"supports":"do not supports");
 }
 
+
+
+
 void GyroscopegetValue(notification_data* data){
 	Gyroscope pA= Gyroscope_get_Instance();
+
+	if(pA->isSupported(pA)){
 	Gyroscope_data vs= pA->getValue(pA);
+
 	if(vs.accuracy!=0)
 	{
 		snprintf(data->result_text,1024,
 				"timestamp: %llu<br>"
 				"value_count: %d<br>"
-				"Gyroscopeurancy: %d<br>"
+				"accurancy: %d<br>"
 				"x: %f<br>"
 				"y: %f<br>"
 				"z: %f<br>",
@@ -1398,22 +1824,27 @@ void GyroscopegetValue(notification_data* data){
 	{
 		snprintf(data->result_text,1024,"Sensor is off");
 	}
-	LOGI("%.2f",vs.x);
-	LOGI("%.2f",vs.y);
-	LOGI("%.2f",vs.z);
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"device doesn't support Gyroscope");
+
+	}
+
 }
+
+
 void LightCALLBACK(sensor_h sensor, sensor_event_s *event, void *user_data){
 
 	notification_data*data=	(notification_data*)user_data;
 	snprintf(data->result_text,1024,
 			"timestamp: %llu<br>"
 			"value_count: %d<br>"
-			"Lighturancy: %d<br>"
-			"x: %f<br>"
-			"y: %f<br>"
-			"z: %f<br>",
+			"accurancy: %d<br>"
+			"level: %f<br>"
+			,
 			event->timestamp,event->value_count,event->accuracy,
-			event->values[0],event->values[1],event->values[2]);
+			event->values[0]);
 
 	elm_object_text_set(_get_title(), data->result_text);
 
@@ -1423,23 +1854,77 @@ void LightCALLBACK(sensor_h sensor, sensor_event_s *event, void *user_data){
 
 void LightaddCallback(notification_data *data){
 	Light pA= Light_get_Instance();
-	pA->addCallback(pA,LightCALLBACK,100,data);
-	snprintf(data->result_text,1024,"add callback completed");
+	if(pA->isSupported(pA)){
+	bool b=pA->addCallback(pA,accCALLBACK,100,data);
+	if (b)
+	{
+	snprintf(data->result_text,1024,"Light add callback completed");
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"Light add callback fail");
+	}
+
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"device doesn't support Light");
+	}
 }
+
 void LightdatachCallback(notification_data *data){
 	Light pA= Light_get_Instance();
-	pA->detachCallback(pA);
-	snprintf(data->result_text,1024,"detach callback completed");
+	if(pA->isSupported(pA)){
+	bool b=pA->detachCallback(pA);
+	if (b)
+	{
+		snprintf(data->result_text,1024,"Light detach callback completed");
+	}
+		snprintf(data->result_text,1024,"Light detach callback fail");
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"device doesn't support Light");
+	}
 }
 
 void Lighton(notification_data *data){
 	Light pA= Light_get_Instance();
-	pA->On(pA);
-}
+	if(pA->isSupported(pA)){
+	bool b=pA->On(pA);
+	if(b)
+	{
+		snprintf(data->result_text,1024,"Light On OK");
+
+	}else
+	{
+		snprintf(data->result_text,1024,"Light On failed");
+
+	}
+	}
+	else
+		{
+			snprintf(data->result_text,1024,"device doesn't support Light");
+		}
+	}
 void Lightoff(notification_data *data){
 	Light pA= Light_get_Instance();
-	pA->Off(pA);
-	LOGI("OFF called");
+	if(pA->isSupported(pA)){
+	bool b=pA->Off(pA);
+	if(b)
+	{
+		snprintf(data->result_text,1024,"Light Off OK");
+
+	}else
+	{
+		snprintf(data->result_text,1024,"Light Off failed");
+
+	}
+	}
+	else
+		{
+			snprintf(data->result_text,1024,"device doesn't support Light");
+		}
 }
 
 
@@ -1449,25 +1934,37 @@ void LightisSupported(notification_data* data){
 	snprintf(data->result_text,1024,"%s",x?"supports":"do not supports");
 }
 
+
+
 void LightgetValue(notification_data* data){
 	Light pA= Light_get_Instance();
+
+	if(pA->isSupported(pA)){
 	Light_data vs= pA->getValue(pA);
+
 	if(vs.accuracy!=0)
 	{
 		snprintf(data->result_text,1024,
 				"timestamp: %llu<br>"
 				"value_count: %d<br>"
-				"Lighturancy: %d<br>"
-				"level: %f"
-
-				,vs.timestamp,vs.value_count,vs.accuracy,vs.level);
+				"accurancy: %d<br>"
+				"level: %f<br>"
+				,
+				vs.timestamp,vs.value_count,vs.accuracy,vs.level);
 	}
 	else
 	{
 		snprintf(data->result_text,1024,"Sensor is off");
 	}
-	LOGI("%.2f",vs.level);
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"device doesn't support Light");
+
+	}
+
 }
+
 
 void ProximityCALLBACK(sensor_h sensor, sensor_event_s *event, void *user_data){
 
@@ -1476,11 +1973,10 @@ void ProximityCALLBACK(sensor_h sensor, sensor_event_s *event, void *user_data){
 			"timestamp: %llu<br>"
 			"value_count: %d<br>"
 			"Proximityurancy: %d<br>"
-			"x: %f<br>"
-			"y: %f<br>"
-			"z: %f<br>",
+			"proximity: %f<br>"
+			,
 			event->timestamp,event->value_count,event->accuracy,
-			event->values[0],event->values[1],event->values[2]);
+			event->values[0]);
 
 	elm_object_text_set(_get_title(), data->result_text);
 
@@ -1490,23 +1986,76 @@ void ProximityCALLBACK(sensor_h sensor, sensor_event_s *event, void *user_data){
 
 void ProximityaddCallback(notification_data *data){
 	Proximity pA= Proximity_get_Instance();
-	pA->addCallback(pA,ProximityCALLBACK,100,data);
-	snprintf(data->result_text,1024,"add callback completed");
+	if(pA->isSupported(pA)){
+	bool b=pA->addCallback(pA,accCALLBACK,100,data);
+	if (b)
+	{
+	snprintf(data->result_text,1024,"Proximity add callback completed");
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"Proximity add callback fail");
+	}
+
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"device doesn't support Proximity");
+	}
 }
 void ProximitydatachCallback(notification_data *data){
 	Proximity pA= Proximity_get_Instance();
-	pA->detachCallback(pA);
-	snprintf(data->result_text,1024,"detach callback completed");
+	if(pA->isSupported(pA)){
+	bool b=pA->detachCallback(pA);
+	if (b)
+	{
+		snprintf(data->result_text,1024,"Proximity detach callback completed");
+	}
+		snprintf(data->result_text,1024,"Proximity detach callback fail");
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"device doesn't support Proximity");
+	}
 }
 
 void Proximityon(notification_data *data){
 	Proximity pA= Proximity_get_Instance();
-	pA->On(pA);
-}
+	if(pA->isSupported(pA)){
+	bool b=pA->On(pA);
+	if(b)
+	{
+		snprintf(data->result_text,1024,"Proximity On OK");
+
+	}else
+	{
+		snprintf(data->result_text,1024,"Proximity On failed");
+
+	}
+	}
+	else
+		{
+			snprintf(data->result_text,1024,"device doesn't support Proximity");
+		}
+	}
 void Proximityoff(notification_data *data){
 	Proximity pA= Proximity_get_Instance();
-	pA->Off(pA);
-	LOGI("OFF called");
+	if(pA->isSupported(pA)){
+	bool b=pA->Off(pA);
+	if(b)
+	{
+		snprintf(data->result_text,1024,"Proximity Off OK");
+
+	}else
+	{
+		snprintf(data->result_text,1024,"Proximity Off failed");
+
+	}
+	}
+	else
+		{
+			snprintf(data->result_text,1024,"device doesn't support Proximity");
+		}
 }
 
 
@@ -1516,24 +2065,34 @@ void ProximityisSupported(notification_data* data){
 	snprintf(data->result_text,1024,"%s",x?"supports":"do not supports");
 }
 
+
 void ProximitygetValue(notification_data* data){
 	Proximity pA= Proximity_get_Instance();
+
+	if(pA->isSupported(pA)){
 	Proximity_data vs= pA->getValue(pA);
+
 	if(vs.accuracy!=0)
 	{
 		snprintf(data->result_text,1024,
 				"timestamp: %llu<br>"
 				"value_count: %d<br>"
-				"Proximityurancy: %d<br>"
+				"accurancy: %d<br>"
 				"proximity: %f<br>"
-				,vs.timestamp,vs.value_count,vs.accuracy,vs.proximity);
+				,
+				vs.timestamp,vs.value_count,vs.accuracy,vs.proximity);
 	}
 	else
 	{
 		snprintf(data->result_text,1024,"Sensor is off");
 	}
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"device doesn't support Proximity");
 
-	LOGI("%.2f",vs.proximity);
+	}
+
 }
 
 
@@ -1544,37 +2103,88 @@ void PressureCALLBACK(sensor_h sensor, sensor_event_s *event, void *user_data){
 			"timestamp: %llu<br>"
 			"value_count: %d<br>"
 			"Pressureurancy: %d<br>"
-			"x: %f<br>"
-			"y: %f<br>"
-			"z: %f<br>",
+			"hPa: %f<br>"
+			,
 			event->timestamp,event->value_count,event->accuracy,
-			event->values[0],event->values[1],event->values[2]);
+			event->values[0]);
 
 	elm_object_text_set(_get_title(), data->result_text);
 
 
 }
 
-
 void PressureaddCallback(notification_data *data){
 	Pressure pA= Pressure_get_Instance();
-	pA->addCallback(pA,PressureCALLBACK,100,data);
-	snprintf(data->result_text,1024,"add callback completed");
+	if(pA->isSupported(pA)){
+	bool b=pA->addCallback(pA,accCALLBACK,100,data);
+	if (b)
+	{
+	snprintf(data->result_text,1024,"Pressure add callback completed");
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"Pressure add callback fail");
+	}
+
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"device doesn't support Pressure");
+	}
 }
 void PressuredatachCallback(notification_data *data){
 	Pressure pA= Pressure_get_Instance();
-	pA->detachCallback(pA);
-	snprintf(data->result_text,1024,"detach callback completed");
+	if(pA->isSupported(pA)){
+	bool b=pA->detachCallback(pA);
+	if (b)
+	{
+		snprintf(data->result_text,1024,"Pressure detach callback completed");
+	}
+		snprintf(data->result_text,1024,"Pressure detach callback fail");
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"device doesn't support Pressure");
+	}
 }
 
 void Pressureon(notification_data *data){
 	Pressure pA= Pressure_get_Instance();
-	pA->On(pA);
-}
+	if(pA->isSupported(pA)){
+	bool b=pA->On(pA);
+	if(b)
+	{
+		snprintf(data->result_text,1024,"Pressure On OK");
+
+	}else
+	{
+		snprintf(data->result_text,1024,"Pressure On failed");
+
+	}
+	}
+	else
+		{
+			snprintf(data->result_text,1024,"device doesn't support Pressure");
+		}
+	}
 void Pressureoff(notification_data *data){
 	Pressure pA= Pressure_get_Instance();
-	pA->Off(pA);
-	LOGI("OFF called");
+	if(pA->isSupported(pA)){
+	bool b=pA->Off(pA);
+	if(b)
+	{
+		snprintf(data->result_text,1024,"Pressure Off OK");
+
+	}else
+	{
+		snprintf(data->result_text,1024,"Pressure Off failed");
+
+	}
+	}
+	else
+		{
+			snprintf(data->result_text,1024,"device doesn't support Pressure");
+		}
 }
 
 
@@ -1584,16 +2194,21 @@ void PressureisSupported(notification_data* data){
 	snprintf(data->result_text,1024,"%s",x?"supports":"do not supports");
 }
 
+
+
 void PressuregetValue(notification_data* data){
 	Pressure pA= Pressure_get_Instance();
+
+	if(pA->isSupported(pA)){
 	Pressure_data vs= pA->getValue(pA);
+
 	if(vs.accuracy!=0)
 	{
 		snprintf(data->result_text,1024,
 				"timestamp: %llu<br>"
 				"value_count: %d<br>"
-				"Pressureurancy: %d<br>"
-				"x: %f<br>"
+				"accurancy: %d<br>"
+				"hPa: %f<br>"
 				"y: %f<br>"
 				"z: %f<br>",
 				vs.timestamp,vs.value_count,vs.accuracy,vs.hPa);
@@ -1602,9 +2217,15 @@ void PressuregetValue(notification_data* data){
 	{
 		snprintf(data->result_text,1024,"Sensor is off");
 	}
-	LOGI("%.2f",vs.hPa);
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"device doesn't support Pressure");
+
+	}
 
 }
+
 
 void UltraVioletCALLBACK(sensor_h sensor, sensor_event_s *event, void *user_data){
 
@@ -1613,37 +2234,88 @@ void UltraVioletCALLBACK(sensor_h sensor, sensor_event_s *event, void *user_data
 			"timestamp: %llu<br>"
 			"value_count: %d<br>"
 			"UltraVioleturancy: %d<br>"
-			"x: %f<br>"
-			"y: %f<br>"
-			"z: %f<br>",
+			"uvindex: %f<br>"
+			,
 			event->timestamp,event->value_count,event->accuracy,
-			event->values[0],event->values[1],event->values[2]);
+			event->values[0]);
 
 	elm_object_text_set(_get_title(), data->result_text);
 
 
 }
 
-
 void UltraVioletaddCallback(notification_data *data){
 	UltraViolet pA= UltraViolet_get_Instance();
-	pA->addCallback(pA,UltraVioletCALLBACK,100,data);
-	snprintf(data->result_text,1024,"add callback completed");
+	if(pA->isSupported(pA)){
+	bool b=pA->addCallback(pA,accCALLBACK,100,data);
+	if (b)
+	{
+	snprintf(data->result_text,1024,"UltraViolet add callback completed");
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"UltraViolet add callback fail");
+	}
+
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"device doesn't support UltraViolet");
+	}
 }
 void UltraVioletdatachCallback(notification_data *data){
 	UltraViolet pA= UltraViolet_get_Instance();
-	pA->detachCallback(pA);
-	snprintf(data->result_text,1024,"detach callback completed");
+	if(pA->isSupported(pA)){
+	bool b=pA->detachCallback(pA);
+	if (b)
+	{
+		snprintf(data->result_text,1024,"UltraViolet detach callback completed");
+	}
+		snprintf(data->result_text,1024,"UltraViolet detach callback fail");
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"device doesn't support UltraViolet");
+	}
 }
 
 void UltraVioleton(notification_data *data){
 	UltraViolet pA= UltraViolet_get_Instance();
-	pA->On(pA);
-}
+	if(pA->isSupported(pA)){
+	bool b=pA->On(pA);
+	if(b)
+	{
+		snprintf(data->result_text,1024,"UltraViolet On OK");
+
+	}else
+	{
+		snprintf(data->result_text,1024,"UltraViolet On failed");
+
+	}
+	}
+	else
+		{
+			snprintf(data->result_text,1024,"device doesn't support UltraViolet");
+		}
+	}
 void UltraVioletoff(notification_data *data){
 	UltraViolet pA= UltraViolet_get_Instance();
-	pA->Off(pA);
-	LOGI("OFF called");
+	if(pA->isSupported(pA)){
+	bool b=pA->Off(pA);
+	if(b)
+	{
+		snprintf(data->result_text,1024,"UltraViolet Off OK");
+
+	}else
+	{
+		snprintf(data->result_text,1024,"UltraViolet Off failed");
+
+	}
+	}
+	else
+		{
+			snprintf(data->result_text,1024,"device doesn't support UltraViolet");
+		}
 }
 
 
@@ -1653,25 +2325,39 @@ void UltraVioletisSupported(notification_data* data){
 	snprintf(data->result_text,1024,"%s",x?"supports":"do not supports");
 }
 
+
+
 void UltraVioletgetValue(notification_data* data){
 	UltraViolet pA= UltraViolet_get_Instance();
+
+	if(pA->isSupported(pA)){
 	UltraViolet_data vs= pA->getValue(pA);
+
 	if(vs.accuracy!=0)
 	{
 		snprintf(data->result_text,1024,
 				"timestamp: %llu<br>"
 				"value_count: %d<br>"
-				"UltraVioleturancy: %d<br>"
-				"uvIndex: %f<br>"
-				,
-				vs.timestamp,vs.value_count,vs.accuracy,vs.uvindex);
+				"accurancy: %d<br>"
+				"x: %f<br>"
+				"y: %f<br>"
+				"z: %f<br>",
+				vs.timestamp,vs.value_count,vs.accuracy,vs.x,vs.y,vs.z);
 	}
 	else
 	{
 		snprintf(data->result_text,1024,"Sensor is off");
 	}
-	LOGI("%.2f",vs.uvindex);
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"device doesn't support UltraViolet");
+
+	}
+
 }
+
+
 
 void TemperatureCALLBACK(sensor_h sensor, sensor_event_s *event, void *user_data){
 
@@ -1679,12 +2365,11 @@ void TemperatureCALLBACK(sensor_h sensor, sensor_event_s *event, void *user_data
 	snprintf(data->result_text,1024,
 			"timestamp: %llu<br>"
 			"value_count: %d<br>"
-			"Temperatureurancy: %d<br>"
-			"x: %f<br>"
-			"y: %f<br>"
-			"z: %f<br>",
+			"accurancy: %d<br>"
+			"°C: %f<br>"
+			,
 			event->timestamp,event->value_count,event->accuracy,
-			event->values[0],event->values[1],event->values[2]);
+			event->values[0]);
 
 	elm_object_text_set(_get_title(), data->result_text);
 
@@ -1694,23 +2379,76 @@ void TemperatureCALLBACK(sensor_h sensor, sensor_event_s *event, void *user_data
 
 void TemperatureaddCallback(notification_data *data){
 	Temperature pA= Temperature_get_Instance();
-	pA->addCallback(pA,TemperatureCALLBACK,100,data);
-	snprintf(data->result_text,1024,"add callback completed");
+	if(pA->isSupported(pA)){
+	bool b=pA->addCallback(pA,accCALLBACK,100,data);
+	if (b)
+	{
+	snprintf(data->result_text,1024,"Temperature add callback completed");
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"Temperature add callback fail");
+	}
+
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"device doesn't support Temperature");
+	}
 }
 void TemperaturedatachCallback(notification_data *data){
 	Temperature pA= Temperature_get_Instance();
-	pA->detachCallback(pA);
-	snprintf(data->result_text,1024,"detach callback completed");
+	if(pA->isSupported(pA)){
+	bool b=pA->detachCallback(pA);
+	if (b)
+	{
+		snprintf(data->result_text,1024,"Temperature detach callback completed");
+	}
+		snprintf(data->result_text,1024,"Temperature detach callback fail");
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"device doesn't support Temperature");
+	}
 }
 
 void Temperatureon(notification_data *data){
 	Temperature pA= Temperature_get_Instance();
-	pA->On(pA);
-}
-void Temperatureoff(){
+	if(pA->isSupported(pA)){
+	bool b=pA->On(pA);
+	if(b)
+	{
+		snprintf(data->result_text,1024,"Temperature On OK");
+
+	}else
+	{
+		snprintf(data->result_text,1024,"Temperature On failed");
+
+	}
+	}
+	else
+		{
+			snprintf(data->result_text,1024,"device doesn't support Temperature");
+		}
+	}
+void Temperatureoff(notification_data *data){
 	Temperature pA= Temperature_get_Instance();
-	pA->Off(pA);
-	LOGI("OFF called");
+	if(pA->isSupported(pA)){
+	bool b=pA->Off(pA);
+	if(b)
+	{
+		snprintf(data->result_text,1024,"Temperature Off OK");
+
+	}else
+	{
+		snprintf(data->result_text,1024,"Temperature Off failed");
+
+	}
+	}
+	else
+		{
+			snprintf(data->result_text,1024,"device doesn't support Temperature");
+		}
 }
 
 
@@ -1720,16 +2458,21 @@ void TemperatureisSupported(notification_data* data){
 	snprintf(data->result_text,1024,"%s",x?"supports":"do not supports");
 }
 
+
+
 void TemperaturegetValue(notification_data* data){
 	Temperature pA= Temperature_get_Instance();
+
+	if(pA->isSupported(pA)){
 	Temperature_data vs= pA->getValue(pA);
+
 	if(vs.accuracy!=0)
 	{
 		snprintf(data->result_text,1024,
 				"timestamp: %llu<br>"
 				"value_count: %d<br>"
-				"Temperatureurancy: %d<br>"
-				"celcius: %f<br>"
+				"accurancy: %d<br>"
+				"°C: %f<br>"
 				,
 				vs.timestamp,vs.value_count,vs.accuracy,vs.celsius);
 	}
@@ -1737,9 +2480,15 @@ void TemperaturegetValue(notification_data* data){
 	{
 		snprintf(data->result_text,1024,"Sensor is off");
 	}
-	LOGI("%.2f",vs.celsius);
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"device doesn't support Temperature");
+
+	}
 
 }
+
 
 void HumidityCALLBACK(sensor_h sensor, sensor_event_s *event, void *user_data){
 
@@ -1747,12 +2496,11 @@ void HumidityCALLBACK(sensor_h sensor, sensor_event_s *event, void *user_data){
 	snprintf(data->result_text,1024,
 			"timestamp: %llu<br>"
 			"value_count: %d<br>"
-			"Humidityurancy: %d<br>"
-			"x: %f<br>"
-			"y: %f<br>"
-			"z: %f<br>",
+			"accurancy: %d<br>"
+			"percent: %f<br>"
+			,
 			event->timestamp,event->value_count,event->accuracy,
-			event->values[0],event->values[1],event->values[2]);
+			event->values[0]);
 
 	elm_object_text_set(_get_title(), data->result_text);
 
@@ -1762,23 +2510,76 @@ void HumidityCALLBACK(sensor_h sensor, sensor_event_s *event, void *user_data){
 
 void HumidityaddCallback(notification_data *data){
 	Humidity pA= Humidity_get_Instance();
-	pA->addCallback(pA,HumidityCALLBACK,100,data);
-	snprintf(data->result_text,1024,"add callback completed");
+	if(pA->isSupported(pA)){
+	bool b=pA->addCallback(pA,accCALLBACK,100,data);
+	if (b)
+	{
+	snprintf(data->result_text,1024,"Humidity add callback completed");
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"Humidity add callback fail");
+	}
+
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"device doesn't support Humidity");
+	}
 }
 void HumiditydatachCallback(notification_data *data){
 	Humidity pA= Humidity_get_Instance();
-	pA->detachCallback(pA);
-	snprintf(data->result_text,1024,"detach callback completed");
+	if(pA->isSupported(pA)){
+	bool b=pA->detachCallback(pA);
+	if (b)
+	{
+		snprintf(data->result_text,1024,"Humidity detach callback completed");
+	}
+		snprintf(data->result_text,1024,"Humidity detach callback fail");
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"device doesn't support Humidity");
+	}
 }
 
 void Humidityon(notification_data *data){
 	Humidity pA= Humidity_get_Instance();
-	pA->On(pA);
-}
+	if(pA->isSupported(pA)){
+	bool b=pA->On(pA);
+	if(b)
+	{
+		snprintf(data->result_text,1024,"Humidity On OK");
+
+	}else
+	{
+		snprintf(data->result_text,1024,"Humidity On failed");
+
+	}
+	}
+	else
+		{
+			snprintf(data->result_text,1024,"device doesn't support Humidity");
+		}
+	}
 void Humidityoff(notification_data *data){
 	Humidity pA= Humidity_get_Instance();
-	pA->Off(pA);
-	LOGI("OFF called");
+	if(pA->isSupported(pA)){
+	bool b=pA->Off(pA);
+	if(b)
+	{
+		snprintf(data->result_text,1024,"Humidity Off OK");
+
+	}else
+	{
+		snprintf(data->result_text,1024,"Humidity Off failed");
+
+	}
+	}
+	else
+		{
+			snprintf(data->result_text,1024,"device doesn't support Humidity");
+		}
 }
 
 
@@ -1788,16 +2589,20 @@ void HumidityisSupported(notification_data* data){
 	snprintf(data->result_text,1024,"%s",x?"supports":"do not supports");
 }
 
+
 void HumiditygetValue(notification_data* data){
 	Humidity pA= Humidity_get_Instance();
+
+	if(pA->isSupported(pA)){
 	Humidity_data vs= pA->getValue(pA);
+
 	if(vs.accuracy!=0)
 	{
 		snprintf(data->result_text,1024,
 				"timestamp: %llu<br>"
 				"value_count: %d<br>"
-				"Humidityurancy: %d<br>"
-				"humilitypercent: %f<br>"
+				"accurancy: %d<br>"
+				"%: %f<br>"
 				,
 				vs.timestamp,vs.value_count,vs.accuracy,vs.percent);
 	}
@@ -1805,9 +2610,14 @@ void HumiditygetValue(notification_data* data){
 	{
 		snprintf(data->result_text,1024,"Sensor is off");
 	}
-	LOGI("%.2f",vs.percent);
-}
+	}
+	else
+	{
+		snprintf(data->result_text,1024,"device doesn't support Humidity");
 
+	}
+
+}
 
 
 
