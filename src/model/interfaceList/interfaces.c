@@ -41,14 +41,14 @@ typedef struct
 } layout_view_data2;
 
 static String getSharedResourceFile(String x){
-  	String str=calloc(1024,sizeof(char));
+	String str=calloc(1024,sizeof(char));
 
-  	String sharedResRootPath=app_get_shared_resource_path();
-  	snprintf(str,1024,"%s%s",sharedResRootPath,x);
-  	free(sharedResRootPath);
+	String sharedResRootPath=app_get_shared_resource_path();
+	snprintf(str,1024,"%s%s",sharedResRootPath,x);
+	free(sharedResRootPath);
 
-  	return str;
-  }
+	return str;
+}
 
 
 notification_data *log_component_list_get(int *size)
@@ -58,7 +58,9 @@ notification_data *log_component_list_get(int *size)
 			{"LOGERROR", NULL, 0, 0, logerror, },
 			{"LOGINFO", NULL,  0, 0, loginfo, },
 			{"LOGDEBUG", NULL,  0, 0, logdebug, },
-			{"LOGWARNING", NULL,  0, 0, logwarning, }
+			{"LOGWARNING", NULL,  0, 0, logwarning, },
+			{"LOGIF", NULL,  0, 0, logif, }
+
 	};
 	*size = sizeof(notification_list) / sizeof(notification_list[0]);
 	return notification_list;
@@ -69,12 +71,13 @@ notification_data *notification_component_list_get(int *size)
 	static notification_data notification_list[] =
 	{
 
-			{"setIcon", NULL,  0, 0, setNIcon, },
-			{"setTitle", NULL,  0, 0, setNTitle, },
-			{"setText", NULL,  0, 0, setNText, },
-			{"setSound", NULL,  0, 0, setNSound, },
-			{"Show", NULL,  0, 0, NShow, },
-			{"Hide", NULL,  0, 0, NHide, }
+			{"setIcon", NULL, 	 0, 0, setNIcon, },
+			{"setTitle", NULL,	 0, 0, setNTitle, },
+			{"setText", NULL, 	 0, 0, setNText, },
+			{"setSound", NULL,	 0, 0, setNSound, },
+			{"update", NULL,	 0,0,	NUpdate, },
+			{"Show", NULL, 		 0, 0, NShow, },
+			{"Hide", NULL,  	0, 0, NHide, }
 	};
 	*size = sizeof(notification_list) / sizeof(notification_list[0]);
 	return notification_list;
@@ -249,7 +252,7 @@ OngoingNotification OngoingNotification_get_Instance(){
 	static OngoingNotification pOngoingNotification =NULL;
 	if(pOngoingNotification==NULL){
 		pOngoingNotification= NewOngoingNotification();
-	notification_set_size(((OngoingNotificationExtend*)pOngoingNotification)->ongoingnotification_handle,0.0);
+		notification_set_size(((OngoingNotificationExtend*)pOngoingNotification)->ongoingnotification_handle,0.0);
 
 	}
 	return pOngoingNotification;
@@ -277,6 +280,12 @@ void logwarning(notification_data* data){
 	LOGWARNING(LOG_TAG,"this is LOGWARNING EXAMPLE");
 	snprintf(data->result_text,1024,"please<br>"
 			"check LOGWARNING at log console");
+
+}
+void logif(notification_data* data){
+	LOGIF(1==1,LOG_TAG,"this is this LOGIF EXAMPLE");
+	snprintf(data->result_text,1024,"please<br>"
+			"check LOGIF at log console");
 
 }
 
@@ -339,12 +348,18 @@ void setNSound(notification_data* data){
 
 	free(str);
 }
+void NUpdate(notification_data* data){
+	Notification noti = Notification_get_Instance();
+	noti->update(noti);
+}
 void NShow(notification_data* data){
 	Notification noti = Notification_get_Instance();
+	if(((NotificationExtend*)noti)->visible==false)
 	noti->Show(noti);
 }
 void NHide(notification_data* data){
 	Notification noti = Notification_get_Instance();
+	if(((NotificationExtend*)noti)->visible==true)
 	noti->Hide(noti);
 }
 
@@ -399,7 +414,7 @@ void setONProgress(notification_data* data){
 void ONShow(notification_data* data){
 	OngoingNotification on_noti = OngoingNotification_get_Instance();
 	if(((OngoingNotificationExtend*)on_noti)->visible==false)
-	on_noti->Show(on_noti);
+		on_noti->Show(on_noti);
 }
 void ONHide(notification_data* data){
 	OngoingNotification on_noti = OngoingNotification_get_Instance();

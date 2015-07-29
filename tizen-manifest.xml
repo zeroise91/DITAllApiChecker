@@ -19,6 +19,7 @@
         <privilege>http://tizen.org/privilege/nfc</privilege>
         <privilege>http://tizen.org/privilege/network.profile</privilege>
         <privilege>http://tizen.org/privilege/recorder</privilege>
+        <privilege>http://tizen.org/privilege/externalstorage.appdata</privilege>
         <privilege>http://tizen.org/privilege/download</privilege>
         <privilege>http://tizen.org/privilege/location</privilege>
         <privilege>http://tizen.org/privilege/network.set</privilege>
@@ -40,6 +41,7 @@
     <feature name="http://tizen.org/feature/network.secure_element">true</feature>
     <feature name="http://tizen.org/feature/platform.core.cpu.arch.armv7">true</feature>
     <feature name="http://tizen.org/feature/sensor.magnetometer">true</feature>
+    <feature name="http://tizen.org/feature/microphone">true</feature>
     <feature name="http://tizen.org/feature/network.secure_element.uicc">true</feature>
     <feature name="http://tizen.org/feature/sensor.humidity">true</feature>
     <feature name="http://tizen.org/feature/led">true</feature>

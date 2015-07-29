@@ -305,9 +305,8 @@ void MagnetoMeter_item_fill_cb(void *data, Evas_Object *obj, void *event_info)
 	notification_list=MagnetoMeter_component_list_get(&size);
 	notification_list[0].status=lists;
 
-	elm_list_item_append(list,notification_list[0].name,NULL,NULL,_sensorcallback_layout_fill_cb2depth,&notification_list[0]);
 
-	for(int i=1;i<size;i++){
+	for(int i=0;i<size;i++){
 
 		notification_list[i].status=lists;
 		elm_list_item_append(list,notification_list[i].name,NULL,NULL,_tab_view_layout_fill_cb2depth,&notification_list[i]);
@@ -349,11 +348,8 @@ void Gravity_item_fill_cb(void *data, Evas_Object *obj, void *event_info)
 	int size=0;
 	//
 	notification_list=Gravity_component_list_get(&size);
-	notification_list[0].status=lists;
 
-	elm_list_item_append(list,notification_list[0].name,NULL,NULL,_sensorcallback_layout_fill_cb2depth,&notification_list[0]);
-
-	for(int i=1;i<size;i++){
+	for(int i=0;i<size;i++){
 
 		notification_list[i].status=lists;
 		elm_list_item_append(list,notification_list[i].name,NULL,NULL,_tab_view_layout_fill_cb2depth,&notification_list[i]);
@@ -367,7 +363,6 @@ void Gravity_item_fill_cb(void *data, Evas_Object *obj, void *event_info)
 
 
 	datas->navi_item = elm_naviframe_item_push(datas->navi, datas->name, NULL, NULL,datas->layout , NULL);
-	//	_tab_view_layout_fill_cb2depth(data,obj,event_info);
 }
 
 void LinearAccelation_item_fill_cb(void *data, Evas_Object *obj, void *event_info)
@@ -397,9 +392,7 @@ void LinearAccelation_item_fill_cb(void *data, Evas_Object *obj, void *event_inf
 	notification_list=LinearAccelation_component_list_get(&size);
 	notification_list[0].status=lists;
 
-	elm_list_item_append(list,notification_list[0].name,NULL,NULL,_sensorcallback_layout_fill_cb2depth,&notification_list[0]);
-
-	for(int i=1;i<size;i++){
+	for(int i=0;i<size;i++){
 
 		notification_list[i].status=lists;
 		elm_list_item_append(list,notification_list[i].name,NULL,NULL,_tab_view_layout_fill_cb2depth,&notification_list[i]);
@@ -441,11 +434,8 @@ void RotationVector_item_fill_cb(void *data, Evas_Object *obj, void *event_info)
 	int size=0;
 	//
 	notification_list=Rotationvector_component_list_get(&size);
-	notification_list[0].status=lists;
 
-	elm_list_item_append(list,notification_list[0].name,NULL,NULL,_sensorcallback_layout_fill_cb2depth,&notification_list[0]);
-
-	for(int i=1;i<size;i++){
+	for(int i=0;i<size;i++){
 
 		notification_list[i].status=lists;
 		elm_list_item_append(list,notification_list[i].name,NULL,NULL,_tab_view_layout_fill_cb2depth,&notification_list[i]);
@@ -489,9 +479,7 @@ void Orientation_item_fill_cb(void *data, Evas_Object *obj, void *event_info)
 	notification_list=Orientation_component_list_get(&size);
 	notification_list[0].status=lists;
 
-	elm_list_item_append(list,notification_list[0].name,NULL,NULL,_sensorcallback_layout_fill_cb2depth,&notification_list[0]);
-
-	for(int i=1;i<size;i++){
+	for(int i=0;i<size;i++){
 
 		notification_list[i].status=lists;
 		elm_list_item_append(list,notification_list[i].name,NULL,NULL,_tab_view_layout_fill_cb2depth,&notification_list[i]);
@@ -535,9 +523,7 @@ void Gyroscope_item_fill_cb(void *data, Evas_Object *obj, void *event_info)
 	notification_list=Gyroscope_component_list_get(&size);
 	notification_list[0].status=lists;
 
-	elm_list_item_append(list,notification_list[0].name,NULL,NULL,_sensorcallback_layout_fill_cb2depth,&notification_list[0]);
-
-	for(int i=1;i<size;i++){
+	for(int i=0;i<size;i++){
 
 		notification_list[i].status=lists;
 		elm_list_item_append(list,notification_list[i].name,NULL,NULL,_tab_view_layout_fill_cb2depth,&notification_list[i]);
@@ -579,11 +565,8 @@ void Light_item_fill_cb(void *data, Evas_Object *obj, void *event_info)
 	int size=0;
 	//
 	notification_list=Light_component_list_get(&size);
-	notification_list[0].status=lists;
 
-	elm_list_item_append(list,notification_list[0].name,NULL,NULL,_sensorcallback_layout_fill_cb2depth,&notification_list[0]);
-
-	for(int i=1;i<size;i++){
+	for(int i=0;i<size;i++){
 
 		notification_list[i].status=lists;
 		elm_list_item_append(list,notification_list[i].name,NULL,NULL,_tab_view_layout_fill_cb2depth,&notification_list[i]);
@@ -625,11 +608,9 @@ void Proximity_item_fill_cb(void *data, Evas_Object *obj, void *event_info)
 	int size=0;
 	//
 	notification_list=Proximity_component_list_get(&size);
-	notification_list[0].status=lists;
 
-	elm_list_item_append(list,notification_list[0].name,NULL,NULL,_sensorcallback_layout_fill_cb2depth,&notification_list[0]);
 
-	for(int i=1;i<size;i++){
+	for(int i=0;i<size;i++){
 
 		notification_list[i].status=lists;
 		elm_list_item_append(list,notification_list[i].name,NULL,NULL,_tab_view_layout_fill_cb2depth,&notification_list[i]);
@@ -672,11 +653,9 @@ void Pressure_item_fill_cb(void *data, Evas_Object *obj, void *event_info)
 	int size=0;
 	//
 	notification_list=Pressure_component_list_get(&size);
-	notification_list[0].status=lists;
 
-	elm_list_item_append(list,notification_list[0].name,NULL,NULL,_sensorcallback_layout_fill_cb2depth,&notification_list[0]);
 
-	for(int i=1;i<size;i++){
+	for(int i=0;i<size;i++){
 
 		notification_list[i].status=lists;
 		elm_list_item_append(list,notification_list[i].name,NULL,NULL,_tab_view_layout_fill_cb2depth,&notification_list[i]);
@@ -717,11 +696,8 @@ void UltraViolet_item_fill_cb(void *data, Evas_Object *obj, void *event_info)
 	int size=0;
 	//
 	notification_list=UltraViolet_component_list_get(&size);
-	notification_list[0].status=lists;
 
-	elm_list_item_append(list,notification_list[0].name,NULL,NULL,_sensorcallback_layout_fill_cb2depth,&notification_list[0]);
-
-	for(int i=1;i<size;i++){
+	for(int i=0;i<size;i++){
 
 		notification_list[i].status=lists;
 		elm_list_item_append(list,notification_list[i].name,NULL,NULL,_tab_view_layout_fill_cb2depth,&notification_list[i]);
@@ -764,11 +740,7 @@ void Temperature_item_fill_cb(void *data, Evas_Object *obj, void *event_info)
 	//
 	notification_list=Temperature_component_list_get(&size);
 
-	notification_list[0].status=lists;
-
-	elm_list_item_append(list,notification_list[0].name,NULL,NULL,_sensorcallback_layout_fill_cb2depth,&notification_list[0]);
-
-	for(int i=1;i<size;i++){
+	for(int i=0;i<size;i++){
 
 		notification_list[i].status=lists;
 		elm_list_item_append(list,notification_list[i].name,NULL,NULL,_tab_view_layout_fill_cb2depth,&notification_list[i]);
@@ -810,11 +782,8 @@ void Humidity_item_fill_cb(void *data, Evas_Object *obj, void *event_info)
 	int size=0;
 	//
 	notification_list=Humidity_component_list_get(&size);
-	notification_list[0].status=lists;
 
-	elm_list_item_append(list,notification_list[0].name,NULL,NULL,_sensorcallback_layout_fill_cb2depth,&notification_list[0]);
-
-	for(int i=1;i<size;i++){
+	for(int i=0;i<size;i++){
 
 		notification_list[i].status=lists;
 		elm_list_item_append(list,notification_list[i].name,NULL,NULL,_tab_view_layout_fill_cb2depth,&notification_list[i]);
@@ -1276,7 +1245,7 @@ void LinearAccelationgetValue(notification_data* data){
 	LinearAccelation pA= LinearAccelation_get_Instance();
 
 	if(pA->isSupported(pA)){
-	LinearAccelation_data vs= pA->getValue(pA);
+	LinearAcceleration_data vs= pA->getValue(pA);
 
 	if(vs.accuracy!=0)
 	{
@@ -1405,10 +1374,10 @@ void MagnetoMeterisSupported(notification_data* data){
 
 
 void MagnetoMetergetValue(notification_data* data){
-	MagnetoMeter pA= MagnetoMeter_get_Instance();
+	Magnetometer pA= MagnetoMeter_get_Instance();
 
 	if(pA->isSupported(pA)){
-	MagnetoMeter_data vs= pA->getValue(pA);
+	Magnetometer_data vs= pA->getValue(pA);
 
 	if(vs.accuracy!=0)
 	{
@@ -2339,10 +2308,9 @@ void UltraVioletgetValue(notification_data* data){
 				"timestamp: %llu<br>"
 				"value_count: %d<br>"
 				"accurancy: %d<br>"
-				"x: %f<br>"
-				"y: %f<br>"
-				"z: %f<br>",
-				vs.timestamp,vs.value_count,vs.accuracy,vs.x,vs.y,vs.z);
+				"uvindex: %f<br>"
+				,
+				vs.timestamp,vs.value_count,vs.accuracy,vs.uvindex);
 	}
 	else
 	{

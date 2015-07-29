@@ -38,8 +38,8 @@
 
 
 static Evas_Object* img=NULL;
-static Evas_Object* recoderview=NULL;
-
+static Evas* canvas=NULL;
+static Evas_Object* g_eo =NULL;
 
 const char attributeString[][35]={
 		"METADATA_DURATION",			/**< Duration */
@@ -134,7 +134,7 @@ notification_data *file_submodules_list_get(int *size){
 			{ "Video", NULL,  0, 0, none, },
 			{ "Audio", NULL,  0, 0, none, },
 			{ "Image", NULL,  0, 0, none, },
-			{ "Camcorder", NULL,  0, 0, none, },
+			{ "CameraRecorder", NULL,  0, 0, none, },
 			{ "AudioRecorder", NULL,  0, 0, none, }
 	};
 	*size = sizeof(components) / sizeof(components[0]);
@@ -238,7 +238,6 @@ void devicestatus_item_fill_cb(void *data, Evas_Object *obj, void *event_info)
 }
 
 
-Evas* canvas=NULL;
 
 
 void file_item_fill_cb(void *data, Evas_Object *obj, void *event_info)
@@ -259,14 +258,14 @@ void file_item_fill_cb(void *data, Evas_Object *obj, void *event_info)
 		evas_object_move(img, 240, 108);					// Move the given Evas object to the given location inside its canvas�� viewport
 		evas_object_resize(img, 240, 135);				// Change the size of the given Evas object
 	}
-	if(recoderview==NULL)
+	if(g_eo==NULL)
 	{
 
-		recoderview  = evas_object_image_filled_add(canvas);		// Add an image to the given evas
-		evas_object_image_file_set(recoderview, "/opt/usr/apps/org.tizen.ditapichecker.shared/res/images/test.jpg", NULL);//Set the source file from where an image object must fetch the real image data
-		evas_object_move(recoderview, 0, 0);					// Move the given Evas object to the given location inside its canvas�� viewport
-		evas_object_resize(recoderview, 240, 135);
-		evas_object_show(recoderview);// Change the size of the given Evas object
+		g_eo = evas_object_image_add(canvas);
+			         evas_object_image_size_set(g_eo, 240, 320);
+			         evas_object_image_fill_set(g_eo, 0, 320, 240, 320);
+			         evas_object_move(g_eo, 0,480);
+			         evas_object_resize(g_eo, 240, 320);
 	}
 
 	datas->name = notify_info->name;
@@ -639,7 +638,7 @@ void  getimageBurstId (notification_data* data){
 	Image image= image_get_instance();
 	if(((ImageExtends*)image)->imageMetaHandle){
 			String str =image->getBurstId(image);
-		snprintf(data->result_text,1024,"MediaID: %s",str?str:"(none)");
+		snprintf(data->result_text,1024,"BurstID: %s",str?str:"(none)");
 
 		}
 		else{
@@ -806,9 +805,7 @@ void stopvideo(notification_data* data){
 			sprintf(data->result_text,"press<br>setEvasObject button<br>setURI(Video) button<br>first");
 		}
 }
-void recordvideo(notification_data* data){
 
-}
 void getvideoinfo(notification_data* data){
 	Video v= video_get_instance();
 	if(((VideoExtends*)v)->uri){
@@ -893,9 +890,7 @@ void stopaudio(notification_data* data){
 		sprintf(data->result_text,"press<br>setURI(audio)butten<br>first");
 	}
 }
-void recordaudio(notification_data* data){
 
-}
 void getaudioInfo(notification_data* data){
 
 	Audio a= audio_get_instance();
@@ -1003,56 +998,72 @@ void preference__clear(notification_data* data){
 }
 
 
+CameraRecorder CameraRecorder_get_instance(){
 
+	static CameraRecorder cr =NULL;
+	if(cr==NULL)
+		cr=  NewCameraRecroder();
+		return cr;
+	}
 
 
  void camerarecorderinit(notification_data* data){
-
+	 evas_object_show(g_eo);
+	 CameraRecorder cr = CameraRecorder_get_instance();
+	 cr->Init(cr,"/opt/usr/media/Videos/VIDEO_RECORDED.mp4", CAMERA_BACK, g_eo);
  }
  void camerarecorderstart(notification_data* data){
-
+	 CameraRecorder cr = CameraRecorder_get_instance();
+	 cr->Start(cr);
  }
  void camerarecorderpause(notification_data* data){
-
+	 CameraRecorder cr = CameraRecorder_get_instance();
+	 cr->Pause(cr);
  }
  void camerarecorderend(notification_data* data){
 
+	 CameraRecorder cr = CameraRecorder_get_instance();
+	if( cr->End(cr))
+		evas_object_hide(g_eo);
+
  }
  void camerarecordercancel(notification_data* data){
-
+	 evas_object_hide(g_eo);
+	 CameraRecorder cr = CameraRecorder_get_instance();
+	 cr->Cancel(cr);
  }
 
-//AudioRecorder audiorec_get_instance(){
-//	static AudioRecorder pa=NULL;
-//	if(pa==NULL)
-//	{
-//		pa=NewAudioRecorder();
-//	}
-//	return pa;
-//}
+AudioRecorder audiorec_get_instance(){
+	static AudioRecorder pa=NULL;
+	if(pa==NULL)
+	{
+		pa=NewAudioRecroder();
+	}
+	return pa;
+}
 
  void audiorecorderinit(notification_data* data){
-//	 AudioRecorder pa=audiorec_get_instance();
-//	 pa->Init(pa,"/opt/usr/media/Sounds/recorded.mp4");
+	 AudioRecorder pa=audiorec_get_instance();
+	 pa->Init(pa,"/opt/usr/media/Sounds/recorded.mp4");
  }
  void audiorecorderstart(notification_data* data){
-//	 AudioRecorder pa=audiorec_get_instance();
-//	 pa->Start(pa);
+	 AudioRecorder pa=audiorec_get_instance();
+	 pa->Start(pa);
  }
  void audiorecorderpause(notification_data* data){
-//	 AudioRecorder pa=audiorec_get_instance();
-//	 pa->Pause(pa);
+	 AudioRecorder pa=audiorec_get_instance();
+	 pa->Pause(pa);
 
  }
  void audiorecorderend(notification_data* data){
-//	 AudioRecorder pa=audiorec_get_instance();
-//
-//	 pa->End(pa);
+	 AudioRecorder pa=audiorec_get_instance();
+
+	 pa->End(pa);
  }
  void audiorecordercancel(notification_data* data){
-//	 AudioRecorder pa=audiorec_get_instance();
-//
-//	 pa->Cancel(pa);
+	 AudioRecorder pa=audiorec_get_instance();
+
+	 pa->Cancel(pa);
  }
 
 

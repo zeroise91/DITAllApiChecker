@@ -226,6 +226,7 @@
   void loginfo(notification_data* data);
   void logdebug(notification_data* data);
   void logwarning(notification_data* data);
+  void logif(notification_data* data);
 
 
   void setNIcon(notification_data* data);
@@ -233,6 +234,7 @@
   void setNText(notification_data* data);
   void setNSound(notification_data* data);
   void NShow(notification_data* data);
+  void NUpdate(notification_data* data);
   void NHide(notification_data* data);
 
 
