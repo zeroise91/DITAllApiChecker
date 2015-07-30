@@ -77,19 +77,20 @@ struct _Vibration
  *  @warning    사용이 끝났을 때 DestroyVibration() 함수를 꼭 사용해야 한다.
  *
  *  @code{.c}
-Vibration NewVibration (void)
-{
-    VibrationExtend * this = (VibrationExtend *)malloc (sizeof (VibrationExtend));
-
-    this->vibration.Custom = VibrationCustom;
-    this->vibration.Short  = VibrationShort;
-    this->vibration.Middle = VibrationMiddle;
-    this->vibration.Long   = VibrationLong;
-
-    device_haptic_open (0, &this->handle);
-
-    return &this->vibration;
-}
+ *	Vibration NewVibration (void)
+ *	{
+ *	    VibrationExtend * this = (VibrationExtend *)malloc (sizeof (VibrationExtend));
+ *
+ *	    this->vibration.Custom = VibrationCustom;
+ *	    this->vibration.Short  = VibrationShort;
+ *	    this->vibration.Middle = VibrationMiddle;
+ *	    this->vibration.Long   = VibrationLong;
+ *
+ *	   device_haptic_open (0, &this->handle);
+ *
+ *	    return &this->vibration;
+ *	}
+ *	@endcode
  */
 Vibration NewVibration (void);
 
@@ -238,6 +239,7 @@ Display NewDisplay (void)
 
     return &this->display;
 }
+ *	@endcode
  */
 Display NewDisplay (void);
 
@@ -393,6 +395,7 @@ Battery NewBattery (void)
 
     return &this->battery;
 }
+ *	@endcode
  */
 Battery NewBattery (void);
 
@@ -489,6 +492,7 @@ Flash NewFlash (void)
 
     return this;
 }
+ *	@endcode
  */
 Flash NewFlash (void);
 
