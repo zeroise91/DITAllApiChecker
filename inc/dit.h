@@ -22,6 +22,7 @@ typedef char * String;
 
 #endif //DIT_H
 
+
 /*!
  *	@mainpage Do It Tizen for Native API
  *	@brief		간략한 설명
@@ -45,7 +46,4 @@ typedef char * String;
  *	@section MODIFYINFO 수정정보
 	 - 수정일 / 수정자 : README.md처럼 꾸며야 할듯
 	 - 멘붕...
-
---------------------------------------------------------
-
 */

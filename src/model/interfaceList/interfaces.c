@@ -350,7 +350,10 @@ void setNSound(notification_data* data){
 }
 void NUpdate(notification_data* data){
 	Notification noti = Notification_get_Instance();
-	noti->update(noti);
+	bool b =noti->update(noti);
+
+	sprintf(data->result_text,"%s",b?"Notification status updated":"Notification status update failed");
+
 }
 void NShow(notification_data* data){
 	Notification noti = Notification_get_Instance();
@@ -414,16 +417,23 @@ void setONProgress(notification_data* data){
 void ONShow(notification_data* data){
 	OngoingNotification on_noti = OngoingNotification_get_Instance();
 	if(((OngoingNotificationExtend*)on_noti)->visible==false)
+	{
 		on_noti->Show(on_noti);
+	}
 }
 void ONHide(notification_data* data){
 	OngoingNotification on_noti = OngoingNotification_get_Instance();
+	if(((OngoingNotificationExtend*)on_noti)->visible==true)
+	{
 	on_noti->Hide(on_noti);
+	}
 }
 
 void Onupdate(notification_data* data){
 	OngoingNotification on_noti = OngoingNotification_get_Instance();
-	on_noti->update(on_noti);
+	bool b = on_noti->update(on_noti);
+	sprintf(data->result_text,"Ongoing%s",b?"Notification status updated":"Notification status update failed");
+
 
 }
 

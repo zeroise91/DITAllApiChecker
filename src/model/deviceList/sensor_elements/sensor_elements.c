@@ -958,7 +958,7 @@ void accoff(notification_data *data){
 	bool b=pA->Off(pA);
 	if(b)
 	{
-		snprintf(data->result_text,1024,"AcceACCELEROMETERlerometer Off OK");
+		snprintf(data->result_text,1024,"ACCELEROMETER Off OK");
 
 	}else
 	{

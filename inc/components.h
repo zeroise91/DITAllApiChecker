@@ -33,6 +33,11 @@
  notification_data *camerarecorder_component_list_get(int *size);
  notification_data *audiorecorder_component_list_get(int *size);
 
+ notification_data *display_components_get(int *size);
+ notification_data *battery_components_get(int *size);
+ notification_data *flash_components_get(int *size);
+
+
  //cb session
   void log_fill_item_cb(void *data, Evas_Object *obj, void *event_info);
   void notification_item_fill_cb(void *data, Evas_Object *obj, void *event_info);
@@ -73,6 +78,10 @@
 
   void camerarecorder_view_layout_fill_cb(void *data, Evas_Object *obj, void *event_info);
   void audiorecorder_view_layout_fill_cb(void *data, Evas_Object *obj, void *event_info);
+
+  void display_view_layout_fill_cb(void *data, Evas_Object *obj, void *event_info);
+  void battery_view_layout_fill_cb(void *data, Evas_Object *obj, void *event_info);
+  void flash_view_layout_fill_cb(void *data, Evas_Object *obj, void *event_info);
 
 
 

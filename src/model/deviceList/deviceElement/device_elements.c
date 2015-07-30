@@ -28,10 +28,10 @@ typedef struct
 notification_data *file_component_list_get(int *size){
 	static notification_data components[] =
 	{
-			{ "deleteFile", NULL,  0, 0, deletefile, },
-			{ "copyfile", NULL,  0, 0, copyfile, },
-			{ "moveFile", NULL,  0, 0, movefile, },
-			{ "searchFile", NULL,  0, 0, searchfile, }
+			{ "delete", NULL,  0, 0, deletefile, },
+			{ "copy", NULL,  0, 0, copyfile, },
+			{ "move", NULL,  0, 0, movefile, },
+			{ "search", NULL,  0, 0, searchfile, }
 
 
 	};
@@ -43,11 +43,11 @@ notification_data *video_component_list_get(int *size){
 	static notification_data components[] =
 	{
 			{ "setEvasObject", NULL,  0, 0, setevasObject, },
-			{ "setURI(video)", NULL,  0, 0, setURI_video, },
-			{ "playVideo", NULL,  0, 0, playvideo, },
-			{ "pauseVideo", NULL,  0, 0, pausevideo, },
-			{ "stopVideo", NULL,  0, 0, stopvideo, },
-			{ "getVideoinfo", NULL,  0, 0, getvideoinfo, }
+			{ "setURI", NULL,  0, 0, setURI_video, },
+			{ "play", NULL,  0, 0, playvideo, },
+			{ "pauseo", NULL,  0, 0, pausevideo, },
+			{ "stop", NULL,  0, 0, stopvideo, },
+			{ "getInfo", NULL,  0, 0, getvideoinfo, }
 
 	};
 	*size = sizeof(components) / sizeof(components[0]);
@@ -57,11 +57,11 @@ notification_data *video_component_list_get(int *size){
 notification_data *audio_component_list_get(int *size){
 	static notification_data components[] =
 	{
-			{ "setURI(audio)", NULL,  0, 0, setURI_audio, },
-			{ "playAudio", NULL,  0, 0, playaudio, },
-			{ "pauseAudio", NULL,  0, 0, pauseaudio, },
-			{ "stopAudio", NULL,  0, 0, stopaudio, },
-			{ "getAudioInfo", NULL,  0, 0, getaudioInfo, }
+			{ "setURI", NULL,  0, 0, setURI_audio, },
+			{ "play", NULL,  0, 0, playaudio, },
+			{ "pause", NULL,  0, 0, pauseaudio, },
+			{ "stop", NULL,  0, 0, stopaudio, },
+			{ "getInfo", NULL,  0, 0, getaudioInfo, }
 
 
 	};
@@ -72,12 +72,11 @@ notification_data *audio_component_list_get(int *size){
 notification_data *image_component_list_get(int *size){
 	static notification_data components[] =
 	{
-			{ "extractImageInfo", NULL,  0, 0, extractinfo, },
-			{ "getimageBurstId", NULL,  0, 0, getimageBurstId, },
-			{ "getimageMediaId", NULL,  0, 0, getimageMediaId, },
-			{ "getimageDateTaken", NULL,  0, 0, getimageDateTaken, },
-			{ "getimageHeight", NULL,  0, 0, getimageHeight, },
-			{ "getimageWidth", NULL,  0, 0, getimageWidth, }
+			{ "setURI", NULL,  0, 0, extractinfo, },
+			{ "getMediaId", NULL,  0, 0, getimageMediaId, },
+			{ "getDate", NULL,  0, 0, getimageDateTaken, },
+			{ "getHeight", NULL,  0, 0, getimageHeight, },
+			{ "getWidth", NULL,  0, 0, getimageWidth, }
 	};
 	*size = sizeof(components) / sizeof(components[0]);
 	return components;
