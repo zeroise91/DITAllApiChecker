@@ -41,37 +41,37 @@ static Evas* canvas = NULL;
 static Evas_Object* g_eo = NULL;
 
 const char attributeString[][35] = { "METADATA_DURATION", /**< Duration */
-"METADATA_VIDEO_BITRATE", /**< Video Bitrate */
-"METADATA_VIDEO_FPS", /**< Video FPS */
-"METADATA_VIDEO_WIDTH", /**< Video Width */
-"METADATA_VIDEO_HEIGHT", /**< Video Height */
-"METADATA_HAS_VIDEO", /**< Video stream count */
-"METADATA_AUDIO_BITRATE", /**< Audio Bitrate */
-"METADATA_AUDIO_CHANNELS", /**< Audio Channels */
-"METADATA_AUDIO_SAMPLERATE", /**< Audio Samplerate */
-"METADATA_AUDIO_BITPERSAMPLE", /**< Audio bit per sample */
-"METADATA_HAS_AUDIO", /**< Audio stream count */
-"METADATA_ARTIST", /**< Artist */
-"METADATA_TITLE", /**< Title */
-"METADATA_ALBUM", /**< Album */
-"METADATA_ALBUM_ARTIST", /**< Album_Artist */
-"METADATA_GENRE", /**< Genre */
-"METADATA_AUTHOR", /**< Author */
-"METADATA_COPYRIGHT", /**< Copyright */
-"METADATA_DATE", /**< Date */
-"METADATA_DESCRIPTION", /**< Description */
-"METADATA_COMMENT", /**< Comment */
-"METADATA_TRACK_NUM", /**< Track number info */
-"METADATA_CLASSIFICATION", /**< Classification */
-"METADATA_RATING", /**< Rating */
-"METADATA_LONGITUDE", /**< Longitude */
-"METADATA_LATITUDE", /**< Latitude */
-"METADATA_ALTITUDE", /**< Altitude */
-"METADATA_CONDUCTOR", /**< Conductor */
-"METADATA_UNSYNCLYRICS", /**< Unsynchronized lyric */
-"METADATA_SYNCLYRICS_NUM", /**< Synchronized lyric (time/lyric set) number */
-"METADATA_RECDATE", /**< Recording date */
-"METADATA_ROTATE" /**< Rotate(Orientation) Information */
+		"METADATA_VIDEO_BITRATE", /**< Video Bitrate */
+		"METADATA_VIDEO_FPS", /**< Video FPS */
+		"METADATA_VIDEO_WIDTH", /**< Video Width */
+		"METADATA_VIDEO_HEIGHT", /**< Video Height */
+		"METADATA_HAS_VIDEO", /**< Video stream count */
+		"METADATA_AUDIO_BITRATE", /**< Audio Bitrate */
+		"METADATA_AUDIO_CHANNELS", /**< Audio Channels */
+		"METADATA_AUDIO_SAMPLERATE", /**< Audio Samplerate */
+		"METADATA_AUDIO_BITPERSAMPLE", /**< Audio bit per sample */
+		"METADATA_HAS_AUDIO", /**< Audio stream count */
+		"METADATA_ARTIST", /**< Artist */
+		"METADATA_TITLE", /**< Title */
+		"METADATA_ALBUM", /**< Album */
+		"METADATA_ALBUM_ARTIST", /**< Album_Artist */
+		"METADATA_GENRE", /**< Genre */
+		"METADATA_AUTHOR", /**< Author */
+		"METADATA_COPYRIGHT", /**< Copyright */
+		"METADATA_DATE", /**< Date */
+		"METADATA_DESCRIPTION", /**< Description */
+		"METADATA_COMMENT", /**< Comment */
+		"METADATA_TRACK_NUM", /**< Track number info */
+		"METADATA_CLASSIFICATION", /**< Classification */
+		"METADATA_RATING", /**< Rating */
+		"METADATA_LONGITUDE", /**< Longitude */
+		"METADATA_LATITUDE", /**< Latitude */
+		"METADATA_ALTITUDE", /**< Altitude */
+		"METADATA_CONDUCTOR", /**< Conductor */
+		"METADATA_UNSYNCLYRICS", /**< Unsynchronized lyric */
+		"METADATA_SYNCLYRICS_NUM", /**< Synchronized lyric (time/lyric set) number */
+		"METADATA_RECDATE", /**< Recording date */
+		"METADATA_ROTATE" /**< Rotate(Orientation) Information */
 };
 typedef struct {
 	Evas_Object *navi;
@@ -90,84 +90,95 @@ static String getSharedResourceFile(String x) {
 	return str;
 }
 notification_data *device_list_get(int *size) {
-	static notification_data components[] = {
+	static notification_data components[] =
+	{
 			{ "DeviceStatus", NULL, 0, 0, none, },
-			{ "File", NULL, 0, 0, none, }, { "Preference", NULL, 0, 0, none, },
+			{ "File", NULL, 0, 0, none, },
+			{ "Preference", NULL, 0, 0, none, },
 			{ "Sensor", NULL, 0, 0, none, },
-			{ "MediaRecorder", NULL, 0, 0, none, } };
+			{ "MediaRecorder", NULL, 0, 0, none, }
+	};
 	*size = sizeof(components) / sizeof(components[0]);
 	return components;
 }
 
 notification_data *devicestatus_list_get(int *size) {
-	static notification_data components[] = {
-
-	{ "Display", NULL, 0, 0, none, }, { "Battery", NULL, 0, 0, none, }, {
-			"Flash", NULL, 0, 0, none, }, { "Vibrator", NULL, 0, 0, none, }
-
+	static notification_data components[] =
+	{
+			{ "Display", NULL, 0, 0, none, },
+			{ "Battery", NULL, 0, 0, none, },
+			{"Flash", NULL, 0, 0, none, },
+			{ "Vibrator", NULL, 0, 0, none, }
 	};
 	*size = sizeof(components) / sizeof(components[0]);
 	return components;
 }
 
 notification_data *display_components_get(int *size) {
-	static notification_data components[] = {
-
-	{ "Lock", NULL, 0, 0, Lock, }, { "unLock", NULL, 0, 0, unLock, }, { "Dim",
-			NULL, 0, 0, Dim, }, { "getBright", NULL, 0, 0, getBright, }, {
-			"setBright", NULL, 0, 0, setBright, }
-
+	static notification_data components[] =
+	{
+			{ "Lock", NULL, 0, 0, Lock, },
+			{ "unLock", NULL, 0, 0, unLock, },
+			{ "Dim",NULL, 0, 0, Dim, },
+			{ "getBright", NULL, 0, 0, getBright, },
+			{ "setBright", NULL, 0, 0, setBright, }
 	};
 	*size = sizeof(components) / sizeof(components[0]);
 	return components;
 }
 notification_data *battery_components_get(int *size) {
-	static notification_data components[] = {
-
-	{ "getLevel", NULL, 0, 0, getLevel, }, { "isCharging", NULL, 0, 0,
-			isCharging, }
-
+	static notification_data components[] =
+	{
+			{ "getLevel", NULL, 0, 0, getLevel, },
+			{ "isCharging", NULL, 0, 0,	isCharging, }
 	};
 	*size = sizeof(components) / sizeof(components[0]);
 	return components;
 }
 notification_data *flash_components_get(int *size) {
-	static notification_data components[] = {
-
-	{ "On", NULL, 0, 0, onflash, }, { "Off", NULL, 0, 0, offflash, }
-
+	static notification_data components[] =
+	{
+			{ "On", NULL, 0, 0, onflash, },
+			{ "Off", NULL, 0, 0, offflash, }
 	};
 	*size = sizeof(components) / sizeof(components[0]);
 	return components;
 }
 
 notification_data *file_submodules_list_get(int *size) {
-	static notification_data components[] = { { "File", NULL, 0, 0, none, }, {
-			"Video", NULL, 0, 0, none, }, { "Audio", NULL, 0, 0, none, }, {
-			"Image", NULL, 0, 0, none, } };
+	static notification_data components[] =
+	{
+			{ "File", NULL, 0, 0, none, },
+			{"Video", NULL, 0, 0, none, },
+			{ "Audio", NULL, 0, 0, none, },
+			{"Image", NULL, 0, 0, none, }
+	};
 	*size = sizeof(components) / sizeof(components[0]);
 	return components;
 }
 
 notification_data *mediarecorder_list_get(int *size) {
-	static notification_data components[] = { { "CameraRecorder", NULL, 0, 0,
-			none, }, { "AudioRecorder", NULL, 0, 0, none, } };
+	static notification_data components[] = {
+			{ "CameraRecorder", NULL, 0, 0,	none, },
+			{ "AudioRecorder", NULL, 0, 0, none, }
+	};
 	*size = sizeof(components) / sizeof(components[0]);
 	return components;
 }
 
 notification_data *preference_component_list_get(int *size) {
-	static notification_data components[] = { { "getInt", NULL, 0, 0,
-			preference_int_get, }, { "getString", NULL, 0, 0,
-			preference_string_get, }, { "getBoolean", NULL, 0, 0,
-			preference_boolean_get, }, { "getDouble", NULL, 0, 0,
-			preference_double_get, },
-			{ "setInt", NULL, 0, 0, preference_int_set, }, { "setString", NULL,
-					0, 0, preference_string_set, }, { "setBoolean", NULL, 0, 0,
-					preference_boolean_set, }, { "setDouble", NULL, 0, 0,
-					preference_double_set, }, { "remove", NULL, 0, 0,
-					preference__remove, }, { "clear", NULL, 0, 0,
-					preference__clear, }
+	static notification_data components[] =
+	{
+			{ "getInt", NULL, 0, 0,	preference_int_get, },
+			{ "getString", NULL, 0, 0,preference_string_get, },
+			{ "getBoolean", NULL, 0, 0,	preference_boolean_get, },
+			{ "getDouble", NULL, 0, 0, preference_double_get, },
+			{ "setInt", NULL, 0, 0, preference_int_set, },
+			{ "setString", NULL, 0, 0, preference_string_set, },
+			{ "setBoolean", NULL, 0, 0,	preference_boolean_set, },
+			{ "setDouble", NULL, 0, 0, preference_double_set, },
+			{ "remove", NULL, 0, 0,	preference__remove, },
+			{ "clear", NULL, 0, 0,	preference__clear, }
 
 	};
 	*size = sizeof(components) / sizeof(components[0]);
@@ -175,22 +186,34 @@ notification_data *preference_component_list_get(int *size) {
 }
 
 notification_data *sensor_component_list_get(int *size) {
-	static notification_data components[] = { { "Accelerometer", NULL, 0, 0,
-			none, }, { "Gravity", NULL, 0, 0, none, }, { "LinearAccelation",
-			NULL, 0, 0, none, }, { "MagnetoMeter", NULL, 0, 0, none, }, {
-			"RotationVector", NULL, 0, 0, none, }, { "Orientation", NULL, 0, 0,
-			none, }, { "Gyroscope", NULL, 0, 0, none, }, { "Light", NULL, 0, 0,
-			none, }, { "Proximity", NULL, 0, 0, none, }, { "Pressure", NULL, 0,
-			0, none, }, { "UltraViolet", NULL, 0, 0, none, }, { "Temperature",
-			NULL, 0, 0, none, }, { "Humidity", NULL, 0, 0, none, } };
+	static notification_data components[] =
+	{
+			{ "Accelerometer", NULL, 0, 0, none, },
+			{ "Gravity", NULL, 0, 0, none, },
+			{ "LinearAccelation", NULL, 0, 0, none, },
+			{ "MagnetoMeter", NULL, 0, 0, none, },
+			{"RotationVector", NULL, 0, 0, none, },
+			{ "Orientation", NULL, 0, 0,none, },
+			{ "Gyroscope", NULL, 0, 0, none, },
+			{ "Light", NULL, 0, 0, none, },
+			{ "Proximity", NULL, 0, 0, none, },
+			{ "Pressure", NULL, 0, 0, none, },
+			{ "UltraViolet", NULL, 0, 0, none, },
+			{ "Temperature",NULL, 0, 0, none, },
+			{ "Humidity", NULL, 0, 0, none, }
+	};
 	*size = sizeof(components) / sizeof(components[0]);
 	return components;
 }
 
 notification_data *vibrator_component_list_get(int *size) {
-	static notification_data components[] = { { "Custom", NULL, 0, 0, Custom, },
-			{ "short", NULL, 0, 0, Short, }, { "Middle", NULL, 0, 0, Middle, },
-			{ "Long", NULL, 0, 0, Long, } };
+	static notification_data components[] =
+	{
+			{ "Custom", NULL, 0, 0, Custom, },
+			{ "short", NULL, 0, 0, Short, },
+			{ "Middle", NULL, 0, 0, Middle, },
+			{ "Long", NULL, 0, 0, Long, }
+	};
 	*size = sizeof(components) / sizeof(components[0]);
 	return components;
 }
@@ -1236,7 +1259,7 @@ void preference__remove(notification_data* data) {
 	if (pref->Remove("string")) {
 		strcat(str, "string <br>");
 	}
-		sprintf(data->result_text, "%sRemove completed", str);
+	sprintf(data->result_text, "%sRemove completed", str);
 }
 void preference__clear(notification_data* data) {
 
@@ -1286,8 +1309,8 @@ void camerarecorderend(notification_data* data) {
 	bool b = cr->End(cr);
 	sprintf(data->result_text, "%s",
 			b ? "CameraRecorder recorded at"
-				"<br>opt/usr/media/Videos/VIDEO_RECORDED.mp4" :
-				"CameraRecorder end fail");
+					"<br>opt/usr/media/Videos/VIDEO_RECORDED.mp4" :
+					"CameraRecorder end fail");
 
 	if (b == true) {
 		evas_object_hide(g_eo);
