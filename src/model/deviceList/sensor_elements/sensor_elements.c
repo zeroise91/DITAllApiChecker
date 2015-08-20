@@ -29,167 +29,181 @@ typedef struct {
 } layout_view_data2;
 
 notification_data *Accelerometer_component_list_get(int *size) {
-	static notification_data components[] = { { "addCallback", NULL, 0, 0,
-			accaddCallback, },
-			{ "datachCallback", NULL, 0, 0, accdatachCallback, }, { "On", NULL,
-					0, 0, accon, }, { "Off", NULL, 0, 0, accoff, }, {
-					"isSupported", NULL, 0, 0, accisSupported, }, { "getValue",
-			NULL, 0, 0, accgetValue, }
-
+	static notification_data components[] =
+	{
+			{ "addCallback", NULL, 0, 0,accaddCallback, },
+			{ "datachCallback", NULL, 0, 0, accdatachCallback, },
+			{ "On", NULL,0, 0, accon, },
+			{ "Off", NULL, 0, 0, accoff, },
+			{"isSupported", NULL, 0, 0, accisSupported, },
+			{ "getValue",NULL, 0, 0, accgetValue, }
 	};
 	*size = sizeof(components) / sizeof(components[0]);
 	return components;
 }
 
 notification_data *Gravity_component_list_get(int *size) {
-	static notification_data components[] = { { "addCallback", NULL, 0, 0,
-			GravityaddCallback, }, { "datachCallback", NULL, 0, 0,
-			GravitydatachCallback, }, { "On", NULL, 0, 0, Gravityon, }, { "Off",
-	NULL, 0, 0, Gravityoff, },
-			{ "isSupported", NULL, 0, 0, GravityisSupported, }, { "getValue",
-			NULL, 0, 0, GravitygetValue, }
-
+	static notification_data components[] =
+	{
+			{ "addCallback", NULL, 0, 0,GravityaddCallback, },
+			{ "datachCallback", NULL, 0, 0,	GravitydatachCallback, },
+			{ "On", NULL, 0, 0, Gravityon, },
+			{ "Off",NULL, 0, 0, Gravityoff, },
+			{ "isSupported", NULL, 0, 0, GravityisSupported, },
+			{ "getValue",NULL, 0, 0, GravitygetValue, }
 	};
 	*size = sizeof(components) / sizeof(components[0]);
 	return components;
 }
 notification_data *LinearAccelation_component_list_get(int *size) {
-	static notification_data components[] = { { "addCallback", NULL, 0, 0,
-			LinearAccelationaddCallback, }, { "datachCallback", NULL, 0, 0,
-			LinearAccelationdatachCallback, }, { "On", NULL, 0, 0,
-			LinearAccelationoff, }, { "Off", NULL, 0, 0, LinearAccelationon, },
-			{ "isSupported", NULL, 0, 0, LinearAccelationisSupported, }, {
-					"getValue", NULL, 0, 0, LinearAccelationgetValue, }
-
+	static notification_data components[] =
+	{
+			{ "addCallback", NULL, 0, 0,LinearAccelationaddCallback, },
+			{ "datachCallback", NULL, 0, 0,LinearAccelationdatachCallback, },
+			{ "On", NULL, 0, 0,	LinearAccelationoff, },
+			{ "Off", NULL, 0, 0, LinearAccelationon, },
+			{ "isSupported", NULL, 0, 0, LinearAccelationisSupported, },
+			{ "getValue", NULL, 0, 0, LinearAccelationgetValue, }
 	};
 	*size = sizeof(components) / sizeof(components[0]);
 	return components;
 }
 
 notification_data *MagnetoMeter_component_list_get(int *size) {
-	static notification_data components[] = { { "addCallback", NULL, 0, 0,
-			MagnetoMeteraddCallback, }, { "datachCallback", NULL, 0, 0,
-			MagnetoMeterdatachCallback, },
-			{ "On", NULL, 0, 0, MagnetoMeteron, }, { "Off", NULL, 0, 0,
-					MagnetoMeteroff, }, { "isSupported", NULL, 0, 0,
-					MagnetoMeterisSupported, }, { "getValue", NULL, 0, 0,
-					MagnetoMetergetValue, }
-
+	static notification_data components[] =
+	{
+			{ "addCallback", NULL, 0, 0,MagnetoMeteraddCallback, },
+			{ "datachCallback", NULL, 0, 0,MagnetoMeterdatachCallback, },
+			{ "On", NULL, 0, 0,	MagnetoMeteroff, },
+			{ "Off", NULL, 0, 0, MagnetoMeteron, },
+			{ "isSupported", NULL, 0, 0, MagnetoMeterisSupported, },
+			{ "getValue", NULL, 0, 0, MagnetoMetergetValue, }
 	};
 	*size = sizeof(components) / sizeof(components[0]);
 	return components;
 }
 
 notification_data *Rotationvector_component_list_get(int *size) {
-	static notification_data components[] = { { "addCallback", NULL, 0, 0,
-			RotationVectoraddCallback, }, { "datachCallback", NULL, 0, 0,
-			RotationVectordatachCallback, }, { "On", NULL, 0, 0,
-			RotationVectoron, }, { "Off", NULL, 0, 0, RotationVectoroff, }, {
-			"isSupported", NULL, 0, 0, RotationVectorisSupported, }, {
-			"getValue", NULL, 0, 0, RotationVectorgetValue, }
-
+	static notification_data components[] =
+	{
+		{ "addCallback", NULL, 0, 0,RotationVectoraddCallback, },
+		{ "datachCallback", NULL, 0, 0,	RotationVectordatachCallback, },
+		{ "On", NULL, 0, 0,RotationVectoron, },
+		{ "Off", NULL, 0, 0, RotationVectoroff, },
+		{ "isSupported", NULL, 0, 0, RotationVectorisSupported, },
+		{"getValue", NULL, 0, 0, RotationVectorgetValue, }
 	};
 	*size = sizeof(components) / sizeof(components[0]);
 	return components;
 }
 
 notification_data *Orientation_component_list_get(int *size) {
-	static notification_data components[] = { { "addCallback", NULL, 0, 0,
-			OrientationaddCallback, }, { "datachCallback", NULL, 0, 0,
-			OrientationdatachCallback, }, { "On", NULL, 0, 0, Orientationon, },
-			{ "Off", NULL, 0, 0, Orientationoff, }, { "isSupported", NULL, 0, 0,
-					OrientationisSupported, }, { "getValue", NULL, 0, 0,
-					OrientationgetValue, }
-
+	static notification_data components[] =
+	{
+		{ "addCallback", NULL, 0, 0, OrientationaddCallback, },
+		{ "datachCallback", NULL, 0, 0, OrientationdatachCallback, },
+		{ "On", NULL, 0, 0, Orientationon, },
+		{ "Off", NULL, 0, 0, Orientationoff, },
+		{ "isSupported", NULL, 0, 0, OrientationisSupported, },
+		{ "getValue", NULL, 0, 0, OrientationgetValue, }
 	};
 	*size = sizeof(components) / sizeof(components[0]);
 	return components;
 }
 
 notification_data *Gyroscope_component_list_get(int *size) {
-	static notification_data components[] = { { "addCallback", NULL, 0, 0,
-			GyroscopeaddCallback, }, { "datachCallback", NULL, 0, 0,
-			GyroscopedatachCallback, }, { "On", NULL, 0, 0, Gyroscopeon, }, {
-			"Off", NULL, 0, 0, Gyroscopeoff, }, { "isSupported", NULL, 0, 0,
-			GyroscopeisSupported, },
-			{ "getValue", NULL, 0, 0, GyroscopegetValue, }
-
+	static notification_data components[] =
+	{
+		{ "addCallback", NULL, 0, 0,GyroscopeaddCallback, },
+		{ "datachCallback", NULL, 0, 0,GyroscopedatachCallback, },
+		{ "On", NULL, 0, 0,	Gyroscopeoff, },
+		{ "Off", NULL, 0, 0,Gyroscopeon, },
+		{ "isSupported", NULL, 0, 0, GyroscopeisSupported, },
+		{ "getValue", NULL, 0, 0, GyroscopegetValue, }
 	};
 	*size = sizeof(components) / sizeof(components[0]);
 	return components;
 }
 
 notification_data *Light_component_list_get(int *size) {
-	static notification_data components[] = { { "addCallback", NULL, 0, 0,
-			LightaddCallback, }, { "datachCallback", NULL, 0, 0,
-			LightdatachCallback, }, { "On", NULL, 0, 0, Lighton, }, { "Off",
-	NULL, 0, 0, Lightoff, }, { "isSupported", NULL, 0, 0, LightisSupported, }, {
-			"getValue", NULL, 0, 0, LightgetValue, }
-
+	static notification_data components[] =
+	{
+		{ "addCallback", NULL, 0, 0,LightaddCallback, },
+		{ "datachCallback", NULL, 0, 0,LightdatachCallback, },
+		{ "On", NULL, 0, 0,	Lightoff, },
+		{ "Off", NULL, 0, 0, Lighton, },
+		{ "isSupported", NULL, 0, 0, LightisSupported, },
+		{ "getValue", NULL, 0, 0, LightgetValue, }
 	};
 	*size = sizeof(components) / sizeof(components[0]);
 	return components;
 }
 
 notification_data *Proximity_component_list_get(int *size) {
-	static notification_data components[] = { { "addCallback", NULL, 0, 0,
-			ProximityaddCallback, }, { "datachCallback", NULL, 0, 0,
-			ProximitydatachCallback, }, { "On", NULL, 0, 0, Proximityon, }, {
-			"Off", NULL, 0, 0, Proximityoff, }, { "isSupported", NULL, 0, 0,
-			ProximityisSupported, },
-			{ "getValue", NULL, 0, 0, ProximitygetValue, }
-
+	static notification_data components[] =
+	{
+		{ "addCallback", NULL, 0, 0, ProximityaddCallback, },
+		{ "datachCallback", NULL, 0, 0, ProximitydatachCallback, },
+		{ "On", NULL, 0, 0, Proximityoff, },
+		{ "Off", NULL, 0, 0, Proximityon, },
+		{ "isSupported", NULL, 0, 0, ProximityisSupported, },
+		{ "getValue", NULL, 0, 0, ProximitygetValue, }
 	};
 	*size = sizeof(components) / sizeof(components[0]);
 	return components;
 }
 
 notification_data *Pressure_component_list_get(int *size) {
-	static notification_data components[] = { { "addCallback", NULL, 0, 0,
-			PressureaddCallback, }, { "datachCallback", NULL, 0, 0,
-			PressuredatachCallback, }, { "On", NULL, 0, 0, Pressureon, }, {
-			"Off", NULL, 0, 0, Pressureoff, }, { "isSupported", NULL, 0, 0,
-			PressureisSupported, },
-			{ "getValue", NULL, 0, 0, PressuregetValue, }
-
+	static notification_data components[] =
+	{
+		{ "addCallback", NULL, 0, 0, PressureaddCallback, },
+		{ "datachCallback", NULL, 0, 0, PressuredatachCallback, },
+		{ "On", NULL, 0, 0, Pressureoff, },
+		{ "Off", NULL, 0, 0, Pressureon, },
+		{ "isSupported", NULL, 0, 0, PressureisSupported, },
+		{ "getValue", NULL, 0, 0, PressuregetValue, }
 	};
 	*size = sizeof(components) / sizeof(components[0]);
 	return components;
 }
 
 notification_data *UltraViolet_component_list_get(int *size) {
-	static notification_data components[] = { { "addCallback", NULL, 0, 0,
-			UltraVioletaddCallback, }, { "datachCallback", NULL, 0, 0,
-			UltraVioletdatachCallback, }, { "On", NULL, 0, 0, UltraVioleton, },
-			{ "Off", NULL, 0, 0, UltraVioletoff, }, { "isSupported", NULL, 0, 0,
-					none, }, { "getValue", NULL, 0, 0, UltraVioletgetValue, }
-
+	static notification_data components[] =
+	{
+		{ "addCallback", NULL, 0, 0, UltraVioletaddCallback, },
+		{ "datachCallback", NULL, 0, 0, UltraVioletdatachCallback, },
+		{ "On", NULL, 0, 0, UltraVioletoff, },
+		{ "Off", NULL, 0, 0, UltraVioleton, },
+		{ "isSupported", NULL, 0, 0, UltraVioletisSupported, },
+		{ "getValue", NULL, 0, 0, UltraVioletgetValue, }
 	};
 	*size = sizeof(components) / sizeof(components[0]);
 	return components;
 }
 
 notification_data *Temperature_component_list_get(int *size) {
-	static notification_data components[] = { { "addCallback", NULL, 0, 0,
-			TemperatureaddCallback, }, { "datachCallback", NULL, 0, 0,
-			TemperaturedatachCallback, }, { "On", NULL, 0, 0, Humidityon, }, {
-			"Off", NULL, 0, 0, TemperaturedatachCallback, }, { "isSupported",
-	NULL, 0, 0, TemperatureisSupported, }, { "getValue", NULL, 0, 0,
-			TemperaturegetValue, }
-
+	static notification_data components[] =
+	{
+		{ "addCallback", NULL, 0, 0, TemperatureaddCallback, },
+		{ "datachCallback", NULL, 0, 0, TemperaturedatachCallback, },
+		{ "On", NULL, 0, 0, Temperatureoff, },
+		{ "Off", NULL, 0, 0, Temperatureon, },
+		{ "isSupported", NULL, 0, 0, TemperatureisSupported, },
+		{ "getValue", NULL, 0, 0, TemperaturegetValue, }
 	};
 	*size = sizeof(components) / sizeof(components[0]);
 	return components;
 }
 
 notification_data *Humidity_component_list_get(int *size) {
-	static notification_data components[] = { { "addCallback", NULL, 0, 0,
-			HumidityaddCallback, }, { "datachCallback", NULL, 0, 0,
-			HumiditydatachCallback, }, { "On", NULL, 0, 0, Humidityon, }, {
-			"Off", NULL, 0, 0, Humidityoff, }, { "isSupported", NULL, 0, 0,
-			HumidityisSupported, },
-			{ "getValue", NULL, 0, 0, HumiditygetValue, }
-
+	static notification_data components[] =
+	{
+		{ "addCallback", NULL, 0, 0, HumidityaddCallback, },
+		{ "datachCallback", NULL, 0, 0, HumiditydatachCallback, },
+		{ "On", NULL, 0, 0, Humidityoff, },
+		{ "Off", NULL, 0, 0, Humidityon, },
+		{ "isSupported", NULL, 0, 0, HumidityisSupported, },
+		{ "getValue", NULL, 0, 0, HumiditygetValue, }
 	};
 	*size = sizeof(components) / sizeof(components[0]);
 	return components;
@@ -1910,8 +1924,7 @@ void PressuregetValue(notification_data* data) {
 					"value_count: %d<br>"
 					"accurancy: %d<br>"
 					"hPa: %f<br>"
-					"y: %f<br>"
-					"z: %f<br>", vs.timestamp, vs.value_count, vs.accuracy,
+					, vs.timestamp, vs.value_count, vs.accuracy,
 					vs.hPa);
 		} else {
 			snprintf(data->result_text, 1024, "Sensor is off");
@@ -2221,7 +2234,10 @@ void HumiditygetValue(notification_data* data) {
 			snprintf(data->result_text, 1024, "timestamp: %llu<br>"
 					"value_count: %d<br>"
 					"accurancy: %d<br>"
-					"%: %f<br>", vs.timestamp, vs.value_count, vs.accuracy,
+					"%%: %f<br>",
+					vs.timestamp,
+					vs.value_count,
+					vs.accuracy,
 					vs.percent);
 		} else {
 			snprintf(data->result_text, 1024, "Sensor is off");

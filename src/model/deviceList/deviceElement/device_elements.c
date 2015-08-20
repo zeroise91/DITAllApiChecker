@@ -45,7 +45,7 @@ notification_data *video_component_list_get(int *size){
 			{ "setEvasObject", NULL,  0, 0, setevasObject, },
 			{ "setURI", NULL,  0, 0, setURI_video, },
 			{ "play", NULL,  0, 0, playvideo, },
-			{ "pauseo", NULL,  0, 0, pausevideo, },
+			{ "pause", NULL,  0, 0, pausevideo, },
 			{ "stop", NULL,  0, 0, stopvideo, },
 			{ "getInfo", NULL,  0, 0, getvideoinfo, }
 
